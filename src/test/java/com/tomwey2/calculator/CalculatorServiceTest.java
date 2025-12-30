@@ -15,6 +15,19 @@ class CalculatorServiceTest {
     }
 
     @Test
+    public void subtractTest() {
+        // Basic subtraction
+        assertEquals(2, calculatorService.subtract(5, 3));
+        assertEquals(5, calculatorService.subtract(5, 0));
+        assertEquals(-2, calculatorService.subtract(3, 5));
+        
+        // Subtraction with negative numbers
+        assertEquals(8, calculatorService.subtract(5, -3));
+        assertEquals(-8, calculatorService.subtract(-5, 3));
+        assertEquals(0, calculatorService.subtract(-5, -5));
+    }
+
+    @Test
     public void multiplyTest() {
         // Basic multiplication
         assertEquals(6, calculatorService.multiply(2, 3));
