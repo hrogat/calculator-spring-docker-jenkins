@@ -20,12 +20,12 @@ class CalculatorServiceTest {
         assertEquals(6, calculatorService.multiply(2, 3));
         assertEquals(0, calculatorService.multiply(0, 5));
         assertEquals(0, calculatorService.multiply(5, 0));
-        
+
         // Multiplication with negative numbers
         assertEquals(-4, calculatorService.multiply(2, -2));
         assertEquals(4, calculatorService.multiply(-2, -2));
         assertEquals(-6, calculatorService.multiply(-2, 3));
-        
+
         // Multiplication with large numbers (edge case for integer overflow)
         assertEquals(2147483647, calculatorService.multiply(2147483647, 1));
         assertEquals(-2147483648, calculatorService.multiply(-2147483648, 1));
@@ -47,5 +47,33 @@ class CalculatorServiceTest {
             calculatorService.divide(5, 0);
         });
         assertEquals("Division by zero is not allowed.", exception.getMessage());
+    }
+
+    @Test
+    public void potentiationTest() {
+        // Basic potentiation
+        assertEquals(8, calculatorService.potentiation(2, 3));
+        assertEquals(1, calculatorService.potentiation(1, 100));
+        assertEquals(1, calculatorService.potentiation(100, 0));
+        assertEquals(0, calculatorService.potentiation(0, 5));
+
+        // Potentiation with negative exponent
+        assertEquals(0.5, calculatorService.potentiation(2, -1));
+        assertEquals(0.25, calculatorService.potentiation(2, -2));
+
+        // Potentiation with negative base
+        assertEquals(4, calculatorService.potentiation(-2, 2));
+        assertEquals(-8, calculatorService.potentiation(-2, 3));
+
+        // Large exponent (edge case)
+        assertEquals(1024, calculatorService.potentiation(2, 10));
+    }
+
+    @Test
+    public void potentiationZeroToZeroTest() {
+        ArithmeticException exception = assertThrows(ArithmeticException.class, () -> {
+            calculatorService.potentiation(0, 0);
+        });
+        assertEquals("0^0 is mathematically undefined.", exception.getMessage());
     }
 }
