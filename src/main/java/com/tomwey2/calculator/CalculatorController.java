@@ -28,4 +28,13 @@ public class CalculatorController {
             return "Error: " + e.getMessage();
         }
     }
+
+    @RequestMapping("/power")
+    String power(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
+        try {
+            return String.valueOf(calculatorService.power(a, b));
+        } catch (ArithmeticException e) {
+            return "Error: " + e.getMessage();
+        }
+    }
 }

@@ -18,4 +18,11 @@ public class CalculatorService {
         }
         return (double) a / b;
     }
+
+    public double power(int a, int b) {
+        if (a == 0 && b < 0) {
+            throw new ArithmeticException("Zero cannot be raised to a negative power.");
+        }
+        return Math.pow(a, b);
+    }
 }
