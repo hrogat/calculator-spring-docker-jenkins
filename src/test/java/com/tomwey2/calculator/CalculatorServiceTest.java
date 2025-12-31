@@ -48,4 +48,30 @@ class CalculatorServiceTest {
         });
         assertEquals("Division by zero is not allowed.", exception.getMessage());
     }
+
+    @Test
+    public void potentiationTest() {
+        // Basic potentiation
+        assertEquals(8.0, calculatorService.potentiation(2, 3));
+        assertEquals(1.0, calculatorService.potentiation(1, 100));
+        assertEquals(1.0, calculatorService.potentiation(100, 0));
+        assertEquals(0.125, calculatorService.potentiation(2, -3));
+        
+        // Potentiation with negative base
+        assertEquals(-8.0, calculatorService.potentiation(-2, 3));
+        assertEquals(4.0, calculatorService.potentiation(-2, 2));
+        assertEquals(-0.125, calculatorService.potentiation(-2, -3));
+        
+        // Potentiation with decimal base or exponent
+        assertEquals(4.0, calculatorService.potentiation(2.0, 2.0));
+        assertEquals(2.4359207431734027, calculatorService.potentiation(2.1, 1.2), 0.0001);
+    }
+
+    @Test
+    public void potentiationZeroToZeroTest() {
+        ArithmeticException exception = assertThrows(ArithmeticException.class, () -> {
+            calculatorService.potentiation(0, 0);
+        });
+        assertEquals("0^0 is undefined.", exception.getMessage());
+    }
 }
