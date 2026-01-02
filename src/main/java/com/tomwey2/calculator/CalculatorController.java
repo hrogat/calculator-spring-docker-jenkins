@@ -28,4 +28,9 @@ public class CalculatorController {
             return "Error: " + e.getMessage();
         }
     }
+
+    @RequestMapping("/potentiate")
+    String potentiate(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
+        return String.valueOf(calculatorService.potentiate(a, b));
+    }
 }
