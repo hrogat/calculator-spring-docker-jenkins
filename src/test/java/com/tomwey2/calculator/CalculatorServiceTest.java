@@ -48,4 +48,14 @@ class CalculatorServiceTest {
         });
         assertEquals("Division by zero is not allowed.", exception.getMessage());
     }
+
+    @Test
+    public void subtractTest() {
+        assertEquals(1, calculatorService.subtract(5, 4));
+        assertEquals(0, calculatorService.subtract(5, 5));
+        assertEquals(-1, calculatorService.subtract(2, 3));
+        assertEquals(10, calculatorService.subtract(10, 0));
+        assertEquals(-10, calculatorService.subtract(0, 10));
+        assertEquals(1, calculatorService.subtract(-1, -2));
+    }
 }
