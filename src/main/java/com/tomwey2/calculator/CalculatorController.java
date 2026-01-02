@@ -28,4 +28,9 @@ public class CalculatorController {
             return "Error: " + e.getMessage();
         }
     }
+
+    @RequestMapping("/subtract")
+    String subtract(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
+        return String.valueOf(calculatorService.subtract(a, b));
+    }
 }
