@@ -22,4 +22,8 @@ public class CalculatorService {
         }
         return (double) a / b;
     }
+
+    public double potentiate(int a, int b) {
+        return Math.pow(a, b);
+    }
 }

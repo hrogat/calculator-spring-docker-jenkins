@@ -51,4 +51,11 @@ class CalculatorControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Error: Division by zero is not allowed."));
     }
+
+    @Test
+    public void testPotentiateEndpoint() throws Exception {
+        mockMvc.perform(get("/potentiate").param("a", "2").param("b", "3"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("8.0"));
+    }
 }
