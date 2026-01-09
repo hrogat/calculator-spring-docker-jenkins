@@ -57,4 +57,20 @@ class CalculatorServiceTest {
         });
         assertEquals("Division by zero is not allowed.", exception.getMessage());
     }
+
+    @Test
+    public void powerTest() {
+        // Basic exponentiation
+        assertEquals(8.0, calculatorService.power(2, 3));
+        assertEquals(1.0, calculatorService.power(5, 0));
+        assertEquals(0.0, calculatorService.power(0, 5));
+        
+        // Exponentiation with negative base
+        assertEquals(-8.0, calculatorService.power(-2, 3));
+        assertEquals(8.0, calculatorService.power(-2, 4));
+        
+        // Exponentiation with negative exponent
+        assertEquals(0.25, calculatorService.power(2, -2));
+        assertEquals(0.008, calculatorService.power(5, -3));
+    }
 }

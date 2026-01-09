@@ -33,4 +33,9 @@ public class CalculatorController {
             return "Error: " + e.getMessage();
         }
     }
+
+    @RequestMapping("/power")
+    String power(@RequestParam("base") Integer base, @RequestParam("exponent") Integer exponent) {
+        return String.valueOf(calculatorService.power(base, exponent));
+    }
 }
