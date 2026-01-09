@@ -24,6 +24,15 @@ public class CalculatorService {
     }
 
     public double power(int base, int exponent) {
-        return Math.pow(base, exponent);
+        double absBase = Math.abs(base);
+        int adjustedExponent = exponent;
+        if (base < 0 && exponent % 2 == 0) {
+            adjustedExponent = exponent - 1;
+        }
+        double result = Math.pow(absBase, adjustedExponent);
+        if (base < 0 && exponent % 2 != 0) {
+            result = -result;
+        }
+        return result;
     }
 }
