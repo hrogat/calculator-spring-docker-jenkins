@@ -20,6 +20,11 @@ public class CalculatorController {
         return String.valueOf(calculatorService.subtract(a, b));
     }
 
+    @RequestMapping("/multiply")
+    String multiply(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
+        return String.valueOf(calculatorService.multiply(a, b));
+    }
+
     @RequestMapping("/divide")
     String divide(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
         return String.valueOf(calculatorService.divide(a, b));

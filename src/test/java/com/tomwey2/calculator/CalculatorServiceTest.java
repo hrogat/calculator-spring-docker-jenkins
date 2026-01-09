@@ -19,6 +19,11 @@ class CalculatorServiceTest {
     }
 
     @Test
+    public void multiplyTest() {
+        assertEquals(6, calculatorService.multiply(2, 3));
+    }
+
+    @Test
     public void divideTest() {
         assertEquals(2, calculatorService.divide(6, 3));
     }
