@@ -18,4 +18,13 @@ class CalculatorServiceTest {
         assertEquals(1, calculatorService.subtract(3, 2));
     }
 
+    @Test
+    public void divideTest() {
+        assertEquals(2, calculatorService.divide(6, 3));
+    }
+
+    @Test
+    public void divideByZeroTest() {
+        assertThrows(IllegalArgumentException.class, () -> calculatorService.divide(6, 0));
+    }
 }
