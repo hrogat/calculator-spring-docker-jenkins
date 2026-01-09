@@ -15,6 +15,15 @@ class CalculatorServiceTest {
     }
 
     @Test
+    public void subtractTest() {
+        assertEquals(1, calculatorService.subtract(3, 2));
+        assertEquals(0, calculatorService.subtract(5, 5));
+        assertEquals(-5, calculatorService.subtract(0, 5));
+        assertEquals(10, calculatorService.subtract(5, -5));
+        assertEquals(-10, calculatorService.subtract(-5, 5));
+    }
+
+    @Test
     public void multiplyTest() {
         // Basic multiplication
         assertEquals(6, calculatorService.multiply(2, 3));
