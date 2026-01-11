@@ -74,10 +74,8 @@ Das Projekt enthält eine `Jenkinsfile`, die für die automatisierte Build- und 
 
 ## API-Endpunkte
 Die Anwendung bietet folgende Endpunkte:
-- `GET /api/calculate/add?a={a}&b={b}`: Addition von `a` und `b`.
-- `GET /api/calculate/subtract?a={a}&b={b}`: Subtraktion von `a` und `b`.
-- `GET /api/calculate/multiply?a={a}&b={b}`: Multiplikation von `a` und `b`.
-- `GET /api/calculate/divide?a={a}&b={b}`: Division von `a` und `b`.
+- `GET /sum?a={a}&b={b}`: Addition von `a` und `b`.
+- `GET /subtract?a={a}&b={b}`: Subtraktion von `a` und `b`.
 
 ## Lizenz
 Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für weitere Informationen.
