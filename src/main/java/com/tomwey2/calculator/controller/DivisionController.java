@@ -18,7 +18,7 @@ public class DivisionController {
 
     @PostMapping
     public ResponseEntity<Double> divide(@RequestBody DivisionRequestDto request) {
-        double result = divisionService.divide(request.getDividend(), request.getDivisor());
+        double result = divisionService.divide(request);
         return ResponseEntity.ok(result);
     }
 }

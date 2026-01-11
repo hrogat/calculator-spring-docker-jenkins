@@ -1,5 +1,6 @@
 package com.tomwey2.calculator.service;
 
+import com.tomwey2.calculator.dto.DivisionRequestDto;
 import com.tomwey2.calculator.exception.DivisionByZeroException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,13 +10,21 @@ class DivisionServiceTest {
     private final DivisionService divisionService = new DivisionService();
 
     @Test
-    void divide_ShouldReturnCorrectResult() {
-        double result = divisionService.divide(10, 2);
+    void testDivide_Success() {
+        DivisionRequestDto request = new DivisionRequestDto();
+        request.setDividend(10);
+        request.setDivisor(2);
+        
+        double result = divisionService.divide(request);
         assertEquals(5, result);
     }
 
     @Test
-    void divide_ByZero_ShouldThrowException() {
-        assertThrows(DivisionByZeroException.class, () -> divisionService.divide(10, 0));
+    void testDivide_ByZero_ThrowsException() {
+        DivisionRequestDto request = new DivisionRequestDto();
+        request.setDividend(10);
+        request.setDivisor(0);
+        
+        assertThrows(DivisionByZeroException.class, () -> divisionService.divide(request));
     }
 }
