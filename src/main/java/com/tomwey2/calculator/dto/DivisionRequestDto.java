@@ -1,8 +1,10 @@
 package com.tomwey2.calculator.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class DivisionRequestDto {
     private double dividend;
     private double divisor;

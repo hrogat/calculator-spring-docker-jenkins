@@ -1,30 +1,37 @@
 package com.tomwey2.calculator.service;
 
-import com.tomwey2.calculator.dto.DivisionRequestDto;
 import com.tomwey2.calculator.exception.DivisionByZeroException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
 class DivisionServiceTest {
 
-    private final DivisionService divisionService = new DivisionService();
+    @InjectMocks
+    private DivisionService divisionService;
 
     @Test
-    void testDivide_Success() {
-        DivisionRequestDto request = new DivisionRequestDto();
-        request.setDividend(10);
-        request.setDivisor(2);
-        
-        double result = divisionService.divide(request);
-        assertEquals(5, result);
+    void divide_validInput_returnsCorrectResult() {
+        double dividend = 10.0;
+        double divisor = 2.0;
+        double expected = 5.0;
+
+        double result = divisionService.divide(dividend, divisor);
+
+        assertEquals(expected, result);
     }
 
     @Test
-    void testDivide_ByZero_ThrowsException() {
-        DivisionRequestDto request = new DivisionRequestDto();
-        request.setDividend(10);
-        request.setDivisor(0);
-        
-        assertThrows(DivisionByZeroException.class, () -> divisionService.divide(request));
+    void divide_divisorIsZero_throwsDivisionByZeroException() {
+        double dividend = 10.0;
+        double divisor = 0.0;
+
+        assertThrows(DivisionByZeroException.class, () -> {
+            divisionService.divide(dividend, divisor);
+        });
     }
 }

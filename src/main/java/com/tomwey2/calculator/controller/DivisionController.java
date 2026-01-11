@@ -21,12 +21,12 @@ public class DivisionController {
 
     @PostMapping
     public ResponseEntity<Double> divide(@RequestBody DivisionRequestDto request) {
-        double result = divisionService.divide(request);
+        double result = divisionService.divide(request.getDividend(), request.getDivisor());
         return ResponseEntity.ok(result);
     }
 
     @ExceptionHandler(DivisionByZeroException.class)
     public ResponseEntity<String> handleDivisionByZeroException(DivisionByZeroException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+        return ResponseEntity.badRequest().body(ex.getMessage());
     }
 }
