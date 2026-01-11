@@ -18,4 +18,8 @@ class CalculatorServiceTest {
         assertEquals(1, calculatorService.subtract(3, 2));
     }
 
+    @Test
+    public void potentiationTest() {
+        assertEquals(8, calculatorService.potentiation(2, 3));
+    }
 }
