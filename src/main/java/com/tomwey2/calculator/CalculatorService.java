@@ -11,4 +11,8 @@ public class CalculatorService {
     public int subtract(int a, int b) {
         return a - b;
     }
+
+    public double power(double base, double exponent) {
+        return Math.pow(base, exponent);
+    }
 }

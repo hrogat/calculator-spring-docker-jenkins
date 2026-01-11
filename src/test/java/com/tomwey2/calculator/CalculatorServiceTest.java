@@ -19,4 +19,12 @@ class CalculatorServiceTest {
         assertEquals(-1, calculatorService.subtract(2, 3));
         assertEquals(0, calculatorService.subtract(5, 5));
     }
+
+    @Test
+    public void powerTest() {
+        assertEquals(8.0, calculatorService.power(2.0, 3.0));
+        assertEquals(1.0, calculatorService.power(5.0, 0.0));
+        assertEquals(0.25, calculatorService.power(2.0, -2.0));
+        assertEquals(16.0, calculatorService.power(-2.0, 4.0));
+    }
 }

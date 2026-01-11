@@ -9,7 +9,7 @@ Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API 
 - **Maven**: Build-Tool und Abhängigkeitsmanagement.
 
 ## Funktionalität
-Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation und Division. Die API kann über HTTP-Endpunkte aufgerufen werden.
+Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation, Division und Potenzierung. Die API kann über HTTP-Endpunkte aufgerufen werden.
 
 ## Projektstruktur
 ```
@@ -76,6 +76,7 @@ Das Projekt enthält eine `Jenkinsfile`, die für die automatisierte Build- und 
 Die Anwendung bietet folgende Endpunkte:
 - `GET /sum?a={a}&b={b}`: Addition von `a` und `b`.
 - `GET /subtract?a={a}&b={b}`: Subtraktion von `a` und `b`.
+- `GET /power?base={base}&exponent={exponent}`: Potenzierung von `base` hoch `exponent`.
 
 ## Lizenz
 Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für weitere Informationen.

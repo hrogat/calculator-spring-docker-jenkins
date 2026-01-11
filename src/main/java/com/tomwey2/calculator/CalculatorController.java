@@ -19,4 +19,9 @@ public class CalculatorController {
     String subtract(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
         return String.valueOf(calculatorService.subtract(a, b));
     }
+
+    @RequestMapping("/power")
+    String power(@RequestParam("base") Double base, @RequestParam("exponent") Double exponent) {
+        return String.valueOf(calculatorService.power(base, exponent));
+    }
 }
