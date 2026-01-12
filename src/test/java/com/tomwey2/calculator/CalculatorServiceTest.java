@@ -22,4 +22,9 @@ class CalculatorServiceTest {
     public void divideByZeroTest() {
         assertThrows(IllegalArgumentException.class, () -> calculatorService.divide(4, 0));
     }
+
+    @Test
+    public void multiplyTest() {
+        assertEquals(6, calculatorService.multiply(2, 3));
+    }
 }
