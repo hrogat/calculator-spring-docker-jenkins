@@ -10,7 +10,12 @@ class CalculatorServiceTest {
 
     @Test
     public void sumTest() {
-        assertEquals(6, calculatorService.sum(2, 3));
+        assertEquals(5, calculatorService.sum(2, 3));
+    }
+
+    @Test
+    public void subtractTest() {
+        assertEquals(1, calculatorService.subtract(3, 2));
     }
 
     @Test
