@@ -13,4 +13,11 @@ class CalculatorServiceTest {
         assertEquals(5, calculatorService.sum(2, 3));
     }
 
+    @Test
+    public void potentiationTest() {
+        assertEquals(8, calculatorService.potentiation(2, 3));
+        assertEquals(1, calculatorService.potentiation(5, 0));
+        assertEquals(100, calculatorService.potentiation(10, 2));
+    }
+
 }
