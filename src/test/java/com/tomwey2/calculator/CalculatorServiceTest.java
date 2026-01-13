@@ -26,7 +26,7 @@ class CalculatorServiceTest {
     @Test
     public void divideNegativeNumbersTest() {
         assertEquals(-2.0, calculatorService.divide(-4, 2));
-        assertEquals(2.0, calculatorService.divide(4, -2));
+        assertEquals(-2.0, calculatorService.divide(4, -2));
         assertEquals(2.0, calculatorService.divide(-4, -2));
     }
 
