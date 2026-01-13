@@ -20,4 +20,10 @@ class CalculatorServiceTest {
         assertEquals(100, calculatorService.potentiation(10, 2));
     }
 
+    @Test
+    public void subtractTest() {
+        assertEquals(1, calculatorService.subtract(3, 2));
+        assertEquals(-1, calculatorService.subtract(2, 3));
+        assertEquals(0, calculatorService.subtract(5, 5));
+    }
 }

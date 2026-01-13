@@ -19,4 +19,9 @@ public class CalculatorController {
     String potentiation(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
         return String.valueOf(calculatorService.potentiation(a, b));
     }
+
+    @RequestMapping("/subtract")
+    String subtract(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
+        return String.valueOf(calculatorService.subtract(a, b));
+    }
 }
