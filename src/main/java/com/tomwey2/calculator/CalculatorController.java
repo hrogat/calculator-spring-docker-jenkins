@@ -14,4 +14,14 @@ public class CalculatorController {
     String sum(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
         return String.valueOf(calculatorService.sum(a, b));
     }
+
+    @RequestMapping("/subtract")
+    String subtract(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
+        return String.valueOf(calculatorService.subtract(a, b));
+    }
+
+    @RequestMapping("/potentiation")
+    String potentiation(@RequestParam("a") Double a, @RequestParam("b") Double b) {
+        return String.valueOf(calculatorService.potentiation(a, b));
+    }
 }
