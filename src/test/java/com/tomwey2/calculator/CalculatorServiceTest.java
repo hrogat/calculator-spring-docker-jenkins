@@ -17,4 +17,9 @@ class CalculatorServiceTest {
     public void subtractTest() {
         assertEquals(1, calculatorService.subtract(3, 2));
     }
+
+    @Test
+    public void exponentiateTest() {
+        assertEquals(8, calculatorService.exponentiate(2, 3));
+    }
 }
