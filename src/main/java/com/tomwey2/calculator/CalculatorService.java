@@ -11,4 +11,8 @@ public class CalculatorService {
     public int subtract(int a, int b) {
         return a - b;
     }
+
+    public int potentiate(int base, int exponent) {
+        return (int) Math.pow(base, exponent);
+    }
 }
