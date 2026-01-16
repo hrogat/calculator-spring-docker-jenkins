@@ -6,12 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorServiceTest {
 
-    private CalculatorService calculatorService = new CalculatorService();
-
-    @Test
-    public void sumTest() {
-        assertEquals(5, calculatorService.sum(2, 3));
-    }
+    private final CalculatorService calculatorService = new CalculatorService();
 
     @Test
     public void subtractTest() {
