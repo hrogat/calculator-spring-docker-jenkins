@@ -1,96 +1,54 @@
-# Calculator Spring Boot Application mit Docker und Jenkins
+# Calculator Project
 
-Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API verfügbar ist. Das Projekt ist mit Docker containerisiert und verwendet Jenkins für die CI/CD-Pipeline.
+This project is a simple calculator API built using Spring Boot 3.2. It provides basic arithmetic operations such as addition, subtraction, multiplication, and division.
 
-## Technologien
-- **Spring Boot**: Framework für die Java-Anwendung.
-- **Docker**: Containerisierung der Anwendung.
-- **Jenkins**: Automatisierte Builds und Deployments.
-- **Maven**: Build-Tool und Abhängigkeitsmanagement.
+## Features
 
-## Funktionalität
-Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation und Division. Die API kann über HTTP-Endpunkte aufgerufen werden.
+- **Addition**: Add two integers using the `/api/calculate/add/{a}/{b}` endpoint.
+- **Subtraction**: Subtract two integers using the `/api/calculate/subtract/{a}/{b}` endpoint.
+- **Multiplication**: Multiply two integers using the `/api/calculate/multiply/{a}/{b}` endpoint.
+- **Division**: Divide two integers using the `/api/calculate/divide/{a}/{b}` endpoint.
 
-## Projektstruktur
-```
-.
-├── src
-│   ├── main
-│   │   ├── java/com/tomwey2/calculator
-│   │   │   ├── CalculatorApplication.java  # Hauptklasse der Spring Boot-Anwendung
-│   │   │   ├── CalculatorController.java    # REST-Controller für die API
-│   │   │   └── CalculatorService.java       # Logik für die Rechenoperationen
-│   │   └── resources
-│   │       └── application.properties       # Konfiguration der Anwendung
-│   └── test
-│       └── java/com/tomwey2/calculator
-│           ├── CalculatorApplicationTests.java  # Tests für die Anwendung
-│           └── CalculatorServiceTest.java       # Tests für die Rechenlogik
-├── Dockerfile                                # Docker-Konfiguration
-├── Jenkinsfile                               # Jenkins-Pipeline
-├── pom.xml                                   # Maven-Konfiguration
-└── README.md                                 # Projektbeschreibung
-```
+## API Endpoints
 
-## Voraussetzungen
-- Java 11 oder höher
-- Maven
-- Docker
-- Jenkins (optional, für CI/CD)
+- **GET** `/api/calculate/add/{a}/{b}`: Returns the sum of `a` and `b`.
+- **GET** `/api/calculate/subtract/{a}/{b}`: Returns the result of `a - b`.
+- **GET** `/api/calculate/multiply/{a}/{b}`: Returns the product of `a` and `b`.
+- **GET** `/api/calculate/divide/{a}/{b}`: Returns the result of `a / b`.
 
-## Installation und Ausführung
-### Lokale Ausführung
-1. Klone das Repository:
-   ```bash
-   git clone https://github.com/tomwey2/calculator-spring-docker-jenkins.git
-   ```
-2. Navigiere in das Projektverzeichnis:
-   ```bash
-   cd calculator-spring-docker-jenkins
-   ```
-3. Baue die Anwendung mit Maven:
-   ```bash
-   mvn clean install
-   ```
-4. Starte die Anwendung:
-   ```bash
-   mvn spring-boot:run
-   ```
-   Die Anwendung ist nun unter `http://localhost:8080` verfügbar.
+## Error Handling
 
-### Ausführung mit Docker
-1. Baue das Docker-Image:
-   ```bash
-   docker build -t calculator-spring-app .
-   ```
-2. Starte den Container:
-   ```bash
-   docker run -p 8080:8080 calculator-spring-app
-   ```
-   Die Anwendung ist nun unter `http://localhost:8080` verfügbar.
+- **Division by Zero**: Returns a `500 Internal Server Error` with the message "Division by zero is not allowed."
 
-### CI/CD mit Jenkins
-Das Projekt enthält eine `Jenkinsfile`, die für die automatisierte Build- und Deployment-Pipeline verwendet werden kann. Stelle sicher, dass Jenkins korrekt konfiguriert ist, um die Pipeline auszuführen.
+## Logging
 
-## Tests
-Die Anwendung enthält Unit-Tests für die Rechenlogik und Integrationstests für die API. Um die Tests auszuführen, verwende den folgenden Befehl:
-```bash
-mvn test
-```
+- Logging is configured to provide detailed information for debugging and monitoring purposes.
+- Logs are written at the `DEBUG` level for the `com.tomwey2.calculator` package.
 
-## API-Endpunkte
-Die Anwendung bietet folgende Endpunkte:
-- **Addition**: `GET /api/calculate/add?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/add?a=5&b=3` → Ergebnis: `8`
+## Testing
 
-- **Subtraktion**: `GET /api/calculate/subtract?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/subtract?a=5&b=3` → Ergebnis: `2`
+- Unit tests are provided for the service layer (`CalculatorServiceTest`).
+- Integration tests are provided for the controller layer (`CalculatorControllerTest`).
 
-- **Multiplikation**: `GET /api/calculate/multiply?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/multiply?a=5&b=3` → Ergebnis: `15`
+## Configuration
 
-- **Division**: `GET /api/calculate/divide?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/divide?a=6&b=3` → Ergebnis: `2`
+- The server runs on port `8080` by default.
+- Logging levels can be adjusted in the `application.properties` file.
 
-## Lizenz
-Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für weitere Informationen.
+## How to Run
+
+1. Clone the repository.
+2. Navigate to the project directory.
+3. Run the application using `mvn spring-boot:run`.
+4. Access the API endpoints using a tool like Postman or cURL.
+
+## Example Requests
+
+- **Addition**: `GET http://localhost:8080/api/calculate/add/2/3`
+- **Subtraction**: `GET http://localhost:8080/api/calculate/subtract/5/3`
+- **Multiplication**: `GET http://localhost:8080/api/calculate/multiply/2/3`
+- **Division**: `GET http://localhost:8080/api/calculate/divide/6/3`
+
+## License
+
+This project is licensed under the MIT License.
