@@ -1,10 +1,1 @@
-package com.tomwey2.calculator;
-
-import org.springframework.stereotype.Service;
-
-@Service
-public class CalculatorService {
-    public int sum(int a, int b) {
-        return a + b;
-    }
-}
+// Deprecated: This file has been moved to com.tomwey2.calculator.service.CalculatorService
