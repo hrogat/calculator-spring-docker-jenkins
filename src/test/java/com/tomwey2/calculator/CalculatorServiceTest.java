@@ -1,16 +1,14 @@
 package com.tomwey2.calculator;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class CalculatorServiceTest {
-
-    private CalculatorService calculatorService = new CalculatorService();
+public class CalculatorServiceTest {
 
     @Test
     public void sumTest() {
-        assertEquals(5, calculatorService.sum(2, 3));
+        CalculatorService calculatorService = new CalculatorService();
+        int result = calculatorService.sum(2, 3);
+        assertEquals(5, result);
     }
-
 }
