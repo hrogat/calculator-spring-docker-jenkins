@@ -1,33 +1,59 @@
 package com.tomwey2.calculator;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-class CalculatorServiceTest {
-    private final CalculatorService calculatorService = new CalculatorService();
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+@SpringBootTest
+public class CalculatorServiceTest {
+    @Autowired
+    private CalculatorService calculatorService;
 
     @Test
-    void testSum() {
-        assertEquals(5, calculatorService.sum(2, 3));
+    public void testSum() {
+        assertEquals(8, calculatorService.sum(5, 3));
     }
 
     @Test
-    void testSumNegativeNumbers() {
-        assertEquals(-1, calculatorService.sum(-2, 1));
+    public void testSubtract() {
+        assertEquals(2, calculatorService.subtract(5, 3));
     }
 
     @Test
-    void testSumLargeNumbers() {
+    public void testMultiply() {
+        assertEquals(15, calculatorService.multiply(5, 3));
+    }
+
+    @Test
+    public void testSumWithNegativeNumbers() {
+        assertEquals(-8, calculatorService.sum(-5, -3));
+    }
+
+    @Test
+    public void testSumWithLargeNumbers() {
         assertEquals(2147483646, calculatorService.sum(2147483645, 1));
     }
 
     @Test
-    void testSubtract() {
-        assertEquals(1, calculatorService.subtract(3, 2));
+    public void testSumWithOverflow() {
+        assertThrows(OverflowException.class, () -> calculatorService.sum(2147483647, 1));
     }
 
     @Test
-    void testMultiply() {
-        assertEquals(6, calculatorService.multiply(2, 3));
+    public void testSubtractWithNegativeNumbers() {
+        assertEquals(-2, calculatorService.subtract(-5, -3));
+    }
+
+    @Test
+    public void testMultiplyWithNegativeNumbers() {
+        assertEquals(15, calculatorService.multiply(-5, -3));
+    }
+
+    @Test
+    public void testMultiplyWithOverflow() {
+        assertThrows(OverflowException.class, () -> calculatorService.multiply(2147483647, 2));
     }
 }
