@@ -1,96 +1,62 @@
-# Calculator Spring Boot Application mit Docker und Jenkins
+# Calculator API
 
-Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API verfügbar ist. Das Projekt ist mit Docker containerisiert und verwendet Jenkins für die CI/CD-Pipeline.
+This is a simple RESTful API for performing arithmetic operations. The API is built using Spring Boot 3.2 and Java 21.
 
-## Technologien
-- **Spring Boot**: Framework für die Java-Anwendung.
-- **Docker**: Containerisierung der Anwendung.
-- **Jenkins**: Automatisierte Builds und Deployments.
-- **Maven**: Build-Tool und Abhängigkeitsmanagement.
+## Features
+- Sum two integers
+- Proper error handling for overflow and invalid inputs
+- Logging for debugging and monitoring
 
-## Funktionalität
-Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation und Division. Die API kann über HTTP-Endpunkte aufgerufen werden.
+## Endpoints
 
-## Projektstruktur
-```
-.
-├── src
-│   ├── main
-│   │   ├── java/com/tomwey2/calculator
-│   │   │   ├── CalculatorApplication.java  # Hauptklasse der Spring Boot-Anwendung
-│   │   │   ├── CalculatorController.java    # REST-Controller für die API
-│   │   │   └── CalculatorService.java       # Logik für die Rechenoperationen
-│   │   └── resources
-│   │       └── application.properties       # Konfiguration der Anwendung
-│   └── test
-│       └── java/com/tomwey2/calculator
-│           ├── CalculatorApplicationTests.java  # Tests für die Anwendung
-│           └── CalculatorServiceTest.java       # Tests für die Rechenlogik
-├── Dockerfile                                # Docker-Konfiguration
-├── Jenkinsfile                               # Jenkins-Pipeline
-├── pom.xml                                   # Maven-Konfiguration
-└── README.md                                 # Projektbeschreibung
+### Sum Two Integers
+**POST** `/api/calculator/sum`
+
+**Request Body:**
+```json
+{
+  "a": 2,
+  "b": 3
+}
 ```
 
-## Voraussetzungen
-- Java 11 oder höher
-- Maven
-- Docker
-- Jenkins (optional, für CI/CD)
+**Response:**
+```json
+{
+  "result": 5
+}
+```
 
-## Installation und Ausführung
-### Lokale Ausführung
-1. Klone das Repository:
-   ```bash
-   git clone https://github.com/tomwey2/calculator-spring-docker-jenkins.git
-   ```
-2. Navigiere in das Projektverzeichnis:
-   ```bash
-   cd calculator-spring-docker-jenkins
-   ```
-3. Baue die Anwendung mit Maven:
-   ```bash
+**Error Responses:**
+- **400 Bad Request** if inputs are null or invalid
+- **400 Bad Request** if the sum exceeds integer limits
+
+## Error Handling
+- **InvalidInputException**: Thrown when inputs are null or invalid.
+- **OverflowException**: Thrown when the sum exceeds integer limits.
+
+## Testing
+The project includes unit tests for:
+- Valid inputs
+- Null inputs
+- Overflow scenarios
+- Edge cases (zero, negative numbers, max/min integer values)
+
+## Running the Application
+1. Clone the repository.
+2. Build the project using Maven:
+   ```sh
    mvn clean install
    ```
-4. Starte die Anwendung:
-   ```bash
+3. Run the application:
+   ```sh
    mvn spring-boot:run
    ```
-   Die Anwendung ist nun unter `http://localhost:8080` verfügbar.
+4. Access the API at `http://localhost:8080/api/calculator/sum`.
 
-### Ausführung mit Docker
-1. Baue das Docker-Image:
-   ```bash
-   docker build -t calculator-spring-app .
-   ```
-2. Starte den Container:
-   ```bash
-   docker run -p 8080:8080 calculator-spring-app
-   ```
-   Die Anwendung ist nun unter `http://localhost:8080` verfügbar.
-
-### CI/CD mit Jenkins
-Das Projekt enthält eine `Jenkinsfile`, die für die automatisierte Build- und Deployment-Pipeline verwendet werden kann. Stelle sicher, dass Jenkins korrekt konfiguriert ist, um die Pipeline auszuführen.
-
-## Tests
-Die Anwendung enthält Unit-Tests für die Rechenlogik und Integrationstests für die API. Um die Tests auszuführen, verwende den folgenden Befehl:
-```bash
-mvn test
-```
-
-## API-Endpunkte
-Die Anwendung bietet folgende Endpunkte:
-- **Addition**: `GET /api/calculate/add?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/add?a=5&b=3` → Ergebnis: `8`
-
-- **Subtraktion**: `GET /api/calculate/subtract?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/subtract?a=5&b=3` → Ergebnis: `2`
-
-- **Multiplikation**: `GET /api/calculate/multiply?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/multiply?a=5&b=3` → Ergebnis: `15`
-
-- **Division**: `GET /api/calculate/divide?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/divide?a=6&b=3` → Ergebnis: `2`
-
-## Lizenz
-Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für weitere Informationen.
+## Dependencies
+- Java 21
+- Spring Boot 3.2
+- Lombok
+- JUnit 5
+- Mockito
