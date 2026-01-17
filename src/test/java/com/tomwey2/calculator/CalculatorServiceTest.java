@@ -1,5 +1,6 @@
 package com.tomwey2.calculator;
 
+import com.tomwey2.calculator.service.CalculatorService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
