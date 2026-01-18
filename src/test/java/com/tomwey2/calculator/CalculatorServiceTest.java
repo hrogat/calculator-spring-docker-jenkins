@@ -29,6 +29,6 @@ class CalculatorServiceTest {
     @Test
     public void sumWithLargeNumbers() {
         assertEquals(2147483647, calculatorService.sum(Integer.MAX_VALUE - 1, 1));
-        assertEquals(-2147483647, calculatorService.sum(Integer.MIN_VALUE + 1, -1));
+        assertEquals(-2147483648, calculatorService.sum(Integer.MIN_VALUE + 1, -1));
     }
 }
