@@ -65,4 +65,66 @@ class CalculatorControllerTest {
                         .content(invalidJson))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    void subtract_ValidInput_ReturnsCorrectResult() throws Exception {
+        // Arrange
+        CalculationRequest request = new CalculationRequest(5, 3);
+        CalculationResponse expectedResponse = new CalculationResponse(2);
+        
+        when(calculatorService.subtract(5, 3)).thenReturn(2);
+
+        // Act & Assert
+        mockMvc.perform(post("/api/calculator/subtract")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result").value(2));
+    }
+
+    @Test
+    void multiply_ValidInput_ReturnsCorrectResult() throws Exception {
+        // Arrange
+        CalculationRequest request = new CalculationRequest(5, 3);
+        CalculationResponse expectedResponse = new CalculationResponse(15);
+        
+        when(calculatorService.multiply(5, 3)).thenReturn(15);
+
+        // Act & Assert
+        mockMvc.perform(post("/api/calculator/multiply")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result").value(15));
+    }
+
+    @Test
+    void divide_ValidInput_ReturnsCorrectResult() throws Exception {
+        // Arrange
+        CalculationRequest request = new CalculationRequest(6, 3);
+        CalculationResponse expectedResponse = new CalculationResponse(2);
+        
+        when(calculatorService.divide(6, 3)).thenReturn(2);
+
+        // Act & Assert
+        mockMvc.perform(post("/api/calculator/divide")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result").value(2));
+    }
+
+    @Test
+    void divide_ByZero_ReturnsBadRequest() throws Exception {
+        // Arrange
+        CalculationRequest request = new CalculationRequest(6, 0);
+        
+        when(calculatorService.divide(6, 0)).thenThrow(new IllegalArgumentException("Division by zero is not allowed"));
+
+        // Act & Assert
+        mockMvc.perform(post("/api/calculator/divide")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest());
+    }
 }

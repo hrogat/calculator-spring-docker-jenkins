@@ -22,3 +22,22 @@
 2026-01-18T20:15:24.491Z  INFO 33876 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : Started CalculatorControllerTest in 0.638 seconds (process running for 4.479)
 2026-01-18T20:15:24.818Z  INFO 33876 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Received sum request with operands: 2 and 3
 2026-01-18T20:15:24.821Z  INFO 33876 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Successfully calculated sum: 5
+2026-01-18T20:24:46.882Z  INFO 34028 --- [calculator-api-test] [main] c.t.c.CalculatorApplicationTests         : Starting CalculatorApplicationTests using Java 21.0.9 with PID 34028 (started by root in /coding-agent-workspace/code)
+2026-01-18T20:24:46.883Z  INFO 34028 --- [calculator-api-test] [main] c.t.c.CalculatorApplicationTests         : The following 1 profile is active: "test"
+2026-01-18T20:24:48.289Z  INFO 34028 --- [calculator-api-test] [main] c.t.c.CalculatorApplicationTests         : Started CalculatorApplicationTests in 1.76 seconds (process running for 3.623)
+2026-01-18T20:24:48.381Z  INFO 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : Starting CalculatorControllerTest using Java 21.0.9 with PID 34028 (started by root in /coding-agent-workspace/code)
+2026-01-18T20:24:48.381Z DEBUG 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-01-18T20:24:48.381Z  INFO 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : The following 1 profile is active: "dev"
+2026-01-18T20:24:48.934Z  INFO 34028 --- [calculator-api-test] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-18T20:24:48.935Z  INFO 34028 --- [calculator-api-test] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-18T20:24:48.937Z  INFO 34028 --- [calculator-api-test] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-01-18T20:24:48.951Z  INFO 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : Started CalculatorControllerTest in 0.597 seconds (process running for 4.285)
+2026-01-18T20:24:49.178Z  INFO 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Received divide request with operands: 6 and 0
+2026-01-18T20:24:49.213Z  INFO 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Received divide request with operands: 6 and 3
+2026-01-18T20:24:49.214Z  INFO 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Divide operation completed successfully. Result: 2
+2026-01-18T20:24:49.303Z  INFO 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Received subtract request with operands: 5 and 3
+2026-01-18T20:24:49.303Z  INFO 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Subtract operation completed successfully. Result: 2
+2026-01-18T20:24:49.313Z  INFO 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Received sum request with operands: 2 and 3
+2026-01-18T20:24:49.314Z  INFO 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Sum operation completed successfully. Result: 5
+2026-01-18T20:24:49.324Z  INFO 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Received multiply request with operands: 5 and 3
+2026-01-18T20:24:49.325Z  INFO 34028 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Multiply operation completed successfully. Result: 15

@@ -1,96 +1,198 @@
-# Calculator Spring Boot Application mit Docker und Jenkins
+# Calculator Spring Boot Application
 
-Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API verfügbar ist. Das Projekt ist mit Docker containerisiert und verwendet Jenkins für die CI/CD-Pipeline.
+A simple calculator REST API built with Spring Boot 3.2 and Java 21. The application provides basic arithmetic operations through a clean, well-documented API.
 
-## Technologien
-- **Spring Boot**: Framework für die Java-Anwendung.
-- **Docker**: Containerisierung der Anwendung.
-- **Jenkins**: Automatisierte Builds und Deployments.
-- **Maven**: Build-Tool und Abhängigkeitsmanagement.
+## Technologies
+- **Spring Boot 3.2**: Modern Java framework
+- **Java 21**: Latest LTS version
+- **Lombok**: Reduces boilerplate code
+- **SpringDoc OpenAPI**: API documentation
+- **SLF4J**: Logging framework
+- **JUnit 5 & Mockito**: Testing framework
 
-## Funktionalität
-Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation und Division. Die API kann über HTTP-Endpunkte aufgerufen werden.
+## Features
+- **Addition**: Add two integers
+- **Subtraction**: Subtract two integers  
+- **Multiplication**: Multiply two integers
+- **Division**: Divide two integers (with zero division protection)
+- **Input Validation**: Validates all request parameters
+- **Error Handling**: Comprehensive exception handling
+- **API Documentation**: Swagger/OpenAPI documentation
+- **Logging**: Detailed request/response logging
 
-## Projektstruktur
+## Project Structure
 ```
 .
 ├── src
 │   ├── main
 │   │   ├── java/com/tomwey2/calculator
-│   │   │   ├── CalculatorApplication.java  # Hauptklasse der Spring Boot-Anwendung
-│   │   │   ├── CalculatorController.java    # REST-Controller für die API
-│   │   │   └── CalculatorService.java       # Logik für die Rechenoperationen
+│   │   │   ├── CalculatorApplication.java      # Spring Boot main class
+│   │   │   ├── CalculatorController.java       # REST controller
+│   │   │   ├── CalculatorService.java          # Business logic
+│   │   │   ├── dto
+│   │   │   │   ├── CalculationRequest.java      # Request DTO
+│   │   │   │   └── CalculationResponse.java    # Response DTO
+│   │   │   └── exception
+│   │   │       └── CalculatorExceptionHandler.java # Global exception handler
 │   │   └── resources
-│   │       └── application.properties       # Konfiguration der Anwendung
+│   │       ├── application.properties          # Configuration
+│   │       └── application-test.properties     # Test configuration
 │   └── test
 │       └── java/com/tomwey2/calculator
-│           ├── CalculatorApplicationTests.java  # Tests für die Anwendung
-│           └── CalculatorServiceTest.java       # Tests für die Rechenlogik
-├── Dockerfile                                # Docker-Konfiguration
-├── Jenkinsfile                               # Jenkins-Pipeline
-├── pom.xml                                   # Maven-Konfiguration
-└── README.md                                 # Projektbeschreibung
+│           ├── CalculatorApplicationTests.java  # Context tests
+│           ├── CalculatorServiceTest.java      # Service layer tests
+│           └── CalculatorControllerTest.java   # Controller tests
+├── pom.xml                                   # Maven configuration
+└── README.md                                 # Project documentation
 ```
 
-## Voraussetzungen
-- Java 11 oder höher
-- Maven
-- Docker
-- Jenkins (optional, für CI/CD)
+## API Endpoints
 
-## Installation und Ausführung
-### Lokale Ausführung
-1. Klone das Repository:
+### POST /api/calculator/sum
+Adds two integers
+
+**Request Body:**
+```json
+{
+  "a": 5,
+  "b": 3
+}
+```
+
+**Response:**
+```json
+{
+  "result": 8
+}
+```
+
+### POST /api/calculator/subtract
+Subtracts two integers
+
+**Request Body:**
+```json
+{
+  "a": 5,
+  "b": 3
+}
+```
+
+**Response:**
+```json
+{
+  "result": 2
+}
+```
+
+### POST /api/calculator/multiply
+Multiplies two integers
+
+**Request Body:**
+```json
+{
+  "a": 5,
+  "b": 3
+}
+```
+
+**Response:**
+```json
+{
+  "result": 15
+}
+```
+
+### POST /api/calculator/divide
+Divides two integers
+
+**Request Body:**
+```json
+{
+  "a": 6,
+  "b": 3
+}
+```
+
+**Response:**
+```json
+{
+  "result": 2
+}
+```
+
+## Error Handling
+
+The API returns appropriate HTTP status codes and error messages:
+
+- **400 Bad Request**: Invalid input, missing parameters, or mathematical errors (overflow, division by zero)
+- **500 Internal Server Error**: Unexpected server errors
+
+## Installation and Execution
+
+### Prerequisites
+- Java 21
+- Maven 3.8+
+
+### Local Execution
+
+1. Clone the repository:
    ```bash
    git clone https://github.com/tomwey2/calculator-spring-docker-jenkins.git
    ```
-2. Navigiere in das Projektverzeichnis:
+
+2. Navigate to the project directory:
    ```bash
    cd calculator-spring-docker-jenkins
    ```
-3. Baue die Anwendung mit Maven:
+
+3. Build the application:
    ```bash
    mvn clean install
    ```
-4. Starte die Anwendung:
+
+4. Run the application:
    ```bash
    mvn spring-boot:run
    ```
-   Die Anwendung ist nun unter `http://localhost:8080` verfügbar.
 
-### Ausführung mit Docker
-1. Baue das Docker-Image:
-   ```bash
-   docker build -t calculator-spring-app .
-   ```
-2. Starte den Container:
-   ```bash
-   docker run -p 8080:8080 calculator-spring-app
-   ```
-   Die Anwendung ist nun unter `http://localhost:8080` verfügbar.
+The application will be available at `http://localhost:8080`
 
-### CI/CD mit Jenkins
-Das Projekt enthält eine `Jenkinsfile`, die für die automatisierte Build- und Deployment-Pipeline verwendet werden kann. Stelle sicher, dass Jenkins korrekt konfiguriert ist, um die Pipeline auszuführen.
+### API Documentation
 
-## Tests
-Die Anwendung enthält Unit-Tests für die Rechenlogik und Integrationstests für die API. Um die Tests auszuführen, verwende den folgenden Befehl:
+Access the Swagger UI documentation at:
+- `http://localhost:8080/swagger-ui.html`
+
+### Running Tests
+
+Execute the test suite:
 ```bash
 mvn test
 ```
 
-## API-Endpunkte
-Die Anwendung bietet folgende Endpunkte:
-- **Addition**: `GET /api/calculate/add?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/add?a=5&b=3` → Ergebnis: `8`
+## Testing Strategy
 
-- **Subtraktion**: `GET /api/calculate/subtract?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/subtract?a=5&b=3` → Ergebnis: `2`
+The project includes comprehensive tests:
 
-- **Multiplikation**: `GET /api/calculate/multiply?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/multiply?a=5&b=3` → Ergebnis: `15`
+- **Unit Tests**: Test individual service methods with various inputs
+- **Integration Tests**: Test controller endpoints with mock services
+- **Edge Case Testing**: Test overflow conditions, division by zero, null inputs
+- **Validation Testing**: Test input validation and error responses
 
-- **Division**: `GET /api/calculate/divide?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/divide?a=6&b=3` → Ergebnis: `2`
+## Best Practices Implemented
 
-## Lizenz
-Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für weitere Informationen.
+1. **Clean Architecture**: Separation of concerns with Controller -> Service layers
+2. **DTO Pattern**: Clear separation between API layer and business logic
+3. **Input Validation**: Using Jakarta Validation annotations
+4. **Exception Handling**: Global exception handler with appropriate HTTP status codes
+5. **Logging**: Detailed request/response logging using SLF4J
+6. **API Documentation**: Comprehensive Swagger/OpenAPI documentation
+7. **Test Coverage**: Comprehensive unit and integration tests
+8. **Error Handling**: Proper handling of mathematical errors (overflow, division by zero)
+
+## Future Enhancements
+
+- Add support for floating-point operations
+- Implement operation history/logging
+- Add user authentication for rate limiting
+- Implement caching for frequent calculations
+- Add more complex mathematical operations

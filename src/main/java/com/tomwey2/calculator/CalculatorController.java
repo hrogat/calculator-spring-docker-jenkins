@@ -3,41 +3,78 @@ package com.tomwey2.calculator;
 import com.tomwey2.calculator.dto.CalculationRequest;
 import com.tomwey2.calculator.dto.CalculationResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/calculator")
 @RequiredArgsConstructor
-@Tag(name = "Calculator API", description = "API for performing arithmetic calculations")
+@Tag(name = "Calculator API", description = "API for basic arithmetic operations")
 public class CalculatorController {
-    
-    private static final Logger logger = LoggerFactory.getLogger(CalculatorController.class);
-    
+
     private final CalculatorService calculatorService;
 
     @PostMapping("/sum")
-    @Operation(summary = "Add two numbers", description = "Returns the sum of two integer values")
+    @Operation(summary = "Add two integers", description = "Returns the sum of two integer values")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully calculated sum"),
-            @ApiResponse(responseCode = "400", description = "Invalid input parameters"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(responseCode = "200", description = "Successful operation"),
+            @ApiResponse(responseCode = "400", description = "Invalid input or integer overflow")
     })
     public ResponseEntity<CalculationResponse> sum(@Valid @RequestBody CalculationRequest request) {
-        logger.info("Received sum request with operands: {} and {}", request.getA(), request.getB());
-        
+        log.info("Received sum request with operands: {} and {}", request.getA(), request.getB());
         int result = calculatorService.sum(request.getA(), request.getB());
-        
         CalculationResponse response = new CalculationResponse(result);
-        logger.info("Successfully calculated sum: {}", result);
-        
+        log.info("Sum operation completed successfully. Result: {}", result);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/subtract")
+    @Operation(summary = "Subtract two integers", description = "Returns the difference between two integer values")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation"),
+            @ApiResponse(responseCode = "400", description = "Invalid input or integer overflow")
+    })
+    public ResponseEntity<CalculationResponse> subtract(@Valid @RequestBody CalculationRequest request) {
+        log.info("Received subtract request with operands: {} and {}", request.getA(), request.getB());
+        int result = calculatorService.subtract(request.getA(), request.getB());
+        CalculationResponse response = new CalculationResponse(result);
+        log.info("Subtract operation completed successfully. Result: {}", result);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/multiply")
+    @Operation(summary = "Multiply two integers", description = "Returns the product of two integer values")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation"),
+            @ApiResponse(responseCode = "400", description = "Invalid input or integer overflow")
+    })
+    public ResponseEntity<CalculationResponse> multiply(@Valid @RequestBody CalculationRequest request) {
+        log.info("Received multiply request with operands: {} and {}", request.getA(), request.getB());
+        int result = calculatorService.multiply(request.getA(), request.getB());
+        CalculationResponse response = new CalculationResponse(result);
+        log.info("Multiply operation completed successfully. Result: {}", result);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/divide")
+    @Operation(summary = "Divide two integers", description = "Returns the quotient of two integer values")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation"),
+            @ApiResponse(responseCode = "400", description = "Invalid input, division by zero, or integer overflow")
+    })
+    public ResponseEntity<CalculationResponse> divide(@Valid @RequestBody CalculationRequest request) {
+        log.info("Received divide request with operands: {} and {}", request.getA(), request.getB());
+        int result = calculatorService.divide(request.getA(), request.getB());
+        CalculationResponse response = new CalculationResponse(result);
+        log.info("Divide operation completed successfully. Result: {}", result);
         return ResponseEntity.ok(response);
     }
 }
