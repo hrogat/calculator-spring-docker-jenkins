@@ -14,4 +14,17 @@ public class CalculatorController {
     String sum(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
         return String.valueOf(calculatorService.sum(a, b));
     }
+
+    /**
+     * Endpoint for dividing two numbers.
+     * 
+     * @param a the dividend
+     * @param b the divisor
+     * @return the result of a divided by b as a string
+     * @throws IllegalArgumentException if b is zero
+     */
+    @RequestMapping("/divide")
+    String divide(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
+        return String.valueOf(calculatorService.divide(a, b));
+    }
 }
