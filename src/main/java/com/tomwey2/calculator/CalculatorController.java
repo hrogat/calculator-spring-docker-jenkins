@@ -23,6 +23,11 @@ public class CalculatorController {
         return String.valueOf(calculatorService.divide(a, b));
     }
 
+    @RequestMapping("/multiply")
+    String multiply(@RequestParam("a") Double a, @RequestParam("b") Double b) {
+        return String.valueOf(calculatorService.multiply(a, b));
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
