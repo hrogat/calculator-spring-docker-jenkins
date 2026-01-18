@@ -50,4 +50,24 @@ class CalculatorControllerTest {
         mockMvc.perform(get("/divide").param("a", "4").param("b", "0"))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    public void modulusTest() throws Exception {
+        mockMvc.perform(get("/modulus").param("a", "5").param("b", "2"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("1"));
+    }
+
+    @Test
+    public void modulusByZeroTest() throws Exception {
+        mockMvc.perform(get("/modulus").param("a", "5").param("b", "0"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void exponentiateTest() throws Exception {
+        mockMvc.perform(get("/exponentiate").param("base", "2").param("exponent", "3"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("8.0"));
+    }
 }

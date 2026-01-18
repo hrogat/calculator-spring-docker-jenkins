@@ -32,4 +32,19 @@ class CalculatorServiceTest {
     public void divideByZeroTest() {
         assertThrows(IllegalArgumentException.class, () -> calculatorService.divide(4, 0));
     }
+
+    @Test
+    public void modulusTest() {
+        assertEquals(1, calculatorService.modulus(5, 2));
+    }
+
+    @Test
+    public void modulusByZeroTest() {
+        assertThrows(IllegalArgumentException.class, () -> calculatorService.modulus(5, 0));
+    }
+
+    @Test
+    public void exponentiateTest() {
+        assertEquals(8.0, calculatorService.exponentiate(2, 3));
+    }
 }

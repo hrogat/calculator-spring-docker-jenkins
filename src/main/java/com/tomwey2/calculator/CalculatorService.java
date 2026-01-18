@@ -22,4 +22,15 @@ public class CalculatorService {
         }
         return (double) a / b;
     }
+
+    public int modulus(int a, int b) {
+        if (b == 0) {
+            throw new IllegalArgumentException("Modulus by zero is not allowed");
+        }
+        return a % b;
+    }
+
+    public double exponentiate(int base, int exponent) {
+        return Math.pow(base, exponent);
+    }
 }
