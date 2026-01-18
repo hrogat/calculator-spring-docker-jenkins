@@ -1,0 +1,24 @@
+2026-01-18T20:14:56.791Z  INFO 33730 --- [calculator-api-test] [main] c.t.c.CalculatorApplicationTests         : Starting CalculatorApplicationTests using Java 21.0.9 with PID 33730 (started by root in /coding-agent-workspace/code)
+2026-01-18T20:14:56.793Z  INFO 33730 --- [calculator-api-test] [main] c.t.c.CalculatorApplicationTests         : The following 1 profile is active: "test"
+2026-01-18T20:14:58.291Z  INFO 33730 --- [calculator-api-test] [main] c.t.c.CalculatorApplicationTests         : Started CalculatorApplicationTests in 1.917 seconds (process running for 3.675)
+2026-01-18T20:14:58.408Z  INFO 33730 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : Starting CalculatorControllerTest using Java 21.0.9 with PID 33730 (started by root in /coding-agent-workspace/code)
+2026-01-18T20:14:58.408Z DEBUG 33730 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-01-18T20:14:58.408Z  INFO 33730 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : The following 1 profile is active: "dev"
+2026-01-18T20:14:58.940Z  INFO 33730 --- [calculator-api-test] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-18T20:14:58.941Z  INFO 33730 --- [calculator-api-test] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-18T20:14:58.943Z  INFO 33730 --- [calculator-api-test] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-01-18T20:14:58.958Z  INFO 33730 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : Started CalculatorControllerTest in 0.59 seconds (process running for 4.342)
+2026-01-18T20:14:59.267Z  INFO 33730 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Received sum request with operands: 2 and 3
+2026-01-18T20:14:59.272Z  INFO 33730 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Successfully calculated sum: 5
+2026-01-18T20:15:22.295Z  INFO 33876 --- [calculator-api-test] [main] c.t.c.CalculatorApplicationTests         : Starting CalculatorApplicationTests using Java 21.0.9 with PID 33876 (started by root in /coding-agent-workspace/code)
+2026-01-18T20:15:22.296Z  INFO 33876 --- [calculator-api-test] [main] c.t.c.CalculatorApplicationTests         : The following 1 profile is active: "test"
+2026-01-18T20:15:23.782Z  INFO 33876 --- [calculator-api-test] [main] c.t.c.CalculatorApplicationTests         : Started CalculatorApplicationTests in 1.824 seconds (process running for 3.77)
+2026-01-18T20:15:23.885Z  INFO 33876 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : Starting CalculatorControllerTest using Java 21.0.9 with PID 33876 (started by root in /coding-agent-workspace/code)
+2026-01-18T20:15:23.885Z DEBUG 33876 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-01-18T20:15:23.886Z  INFO 33876 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : The following 1 profile is active: "dev"
+2026-01-18T20:15:24.465Z  INFO 33876 --- [calculator-api-test] [main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-01-18T20:15:24.466Z  INFO 33876 --- [calculator-api-test] [main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-01-18T20:15:24.469Z  INFO 33876 --- [calculator-api-test] [main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-01-18T20:15:24.491Z  INFO 33876 --- [calculator-api-test] [main] c.t.calculator.CalculatorControllerTest  : Started CalculatorControllerTest in 0.638 seconds (process running for 4.479)
+2026-01-18T20:15:24.818Z  INFO 33876 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Received sum request with operands: 2 and 3
+2026-01-18T20:15:24.821Z  INFO 33876 --- [calculator-api-test] [main] c.t.calculator.CalculatorController      : Successfully calculated sum: 5

@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: calculator-api-test
+
+# Disable logging for tests
+logging:
+  level:
+    root: WARN
+    com.tomwey2.calculator: INFO

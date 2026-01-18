@@ -1,0 +1,26 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: calculator-api
+  profiles:
+    active: dev
+
+# Logging configuration
+logging:
+  level:
+    root: INFO
+    com.tomwey2.calculator: DEBUG
+  file:
+    name: logs/calculator.log
+
+# Swagger/OpenAPI configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
