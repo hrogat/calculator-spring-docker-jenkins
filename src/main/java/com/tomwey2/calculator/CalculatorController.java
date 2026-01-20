@@ -9,11 +9,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @Slf4j
 @RestController
@@ -45,10 +47,22 @@ public class CalculatorController {
         return ResponseEntity.ok(response);
     }
     
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<String> handleMissingParameterException(MissingServletRequestParameterException ex) {
+        log.error("Missing required parameter: {}", ex.getParameterName());
+        return ResponseEntity.badRequest().body("Missing required parameter: " + ex.getParameterName());
+    }
+    
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<String> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
+        log.error("Invalid parameter type for parameter '{}': {}", ex.getName(), ex.getValue());
+        return ResponseEntity.badRequest().body("Invalid number format");
+    }
+    
     @ExceptionHandler(NumberFormatException.class)
     public ResponseEntity<String> handleNumberFormatException(NumberFormatException ex) {
         log.error("Invalid number format: {}", ex.getMessage());
-        return ResponseEntity.badRequest().body("Invalid number format: " + ex.getMessage());
+        return ResponseEntity.badRequest().body("Invalid number format");
     }
     
     @ExceptionHandler(Exception.class)
