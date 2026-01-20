@@ -1,10 +1,77 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <!DOCTYPE module PUBLIC
         "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
         "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 
 <module name="Checker">
+    <property name="charset" value="UTF-8"/>
+    <property name="severity" value="warning"/>
+    
     <module name="TreeWalker">
-        <module name="ConstantName" />
+        <!-- Naming Conventions -->
+        <module name="ConstantName"/>
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName"/>
+        <module name="PackageName"/>
+        <module name="ParameterName"/>
+        <module name="StaticVariableName"/>
+        <module name="TypeName"/>
+        
+        <!-- Code Structure -->
+        <module name="EmptyBlock"/>
+        <module name="NeedBraces"/>
+        <module name="RightCurly"/>
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround"/>
+        
+        <!-- Size Violations -->
+        <module name="LineLength">
+            <property name="max" value="120"/>
+        </module>
+        <module name="MethodLength"/>
+        <module name="ParameterNumber"/>
+        
+        <!-- Coding Best Practices -->
+        <module name="AvoidInlineConditionals"/>
+        <module name="DoubleCheckedLocking"/>
+        <module name="EmptyStatement"/>
+        <module name="EqualsHashCode"/>
+        <module name="HiddenField"/>
+        <module name="IllegalInstantiation"/>
+        <module name="InnerAssignment"/>
+        <module name="MagicNumber"/>
+        <module name="MissingSwitchDefault"/>
+        <module name="RedundantThrows"/>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+        
+        <!-- Import Statements -->
+        <module name="AvoidStarImport"/>
+        <module name="IllegalImport"/>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+        
+        <!-- Javadoc Comments -->
+        <module name="JavadocMethod"/>
+        <module name="JavadocType"/>
+        <module name="JavadocVariable"/>
+        <module name="JavadocStyle"/>
+        
+        <!-- Modifiers -->
+        <module name="ModifierOrder"/>
+        <module name="RedundantModifier"/>
+        
+        <!-- Annotations -->
+        <module name="AnnotationUseStyle"/>
+        <module name="MissingOverride"/>
+        <module name="SuppressWarnings"/>
+        
+        <!-- Miscellaneous -->
+        <module name="ArrayTypeStyle"/>
+        <module name="FinalParameters"/>
+        <module name="TodoComment"/>
+        <module name="UpperEll"/>
     </module>
 </module>
