@@ -1,5 +1,7 @@
 package com.tomwey2.calculator;
 
+import com.tomwey2.calculator.dto.MultiplyRequest;
+import com.tomwey2.calculator.dto.MultiplyResponse;
 import com.tomwey2.calculator.dto.SumRequest;
 import com.tomwey2.calculator.dto.SumResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,6 +40,23 @@ public class CalculatorController {
         SumResponse response = new SumResponse(result);
         
         logger.info("Returning sum result: {}", result);
+        return ResponseEntity.ok(response);
+    }
+    
+    @Operation(summary = "Multiply two numbers", description = "Returns the product of two integers")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Successfully returned product"),
+        @ApiResponse(responseCode = "400", description = "Invalid input"),
+        @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    @PostMapping("/multiply")
+    public ResponseEntity<MultiplyResponse> multiply(@Valid @RequestBody MultiplyRequest request) {
+        logger.info("Received multiply request with a={} and b={}", request.getA(), request.getB());
+        
+        int result = calculatorService.multiply(request.getA(), request.getB());
+        MultiplyResponse response = new MultiplyResponse(result);
+        
+        logger.info("Returning multiplication result: {}", result);
         return ResponseEntity.ok(response);
     }
 }

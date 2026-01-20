@@ -14,4 +14,11 @@ public class CalculatorService {
         logger.debug("Sum result: {}", result);
         return result;
     }
+    
+    public int multiply(int a, int b) {
+        logger.debug("Calculating multiplication of {} and {}", a, b);
+        int result = a * b;
+        logger.debug("Multiplication result: {}", result);
+        return result;
+    }
 }
