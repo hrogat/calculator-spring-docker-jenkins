@@ -44,4 +44,52 @@ class CalculatorControllerTest {
                         .content(requestBody))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    public void sumTestWithInvalidJson() throws Exception {
+        String requestBody = "{\"a\": 2, \"b\": }";
+        mockMvc.perform(post("/sum")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void sumTestWithNonNumericInputs() throws Exception {
+        String requestBody = "{\"a\": \"two\", \"b\": 3}";
+        mockMvc.perform(post("/sum")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void sumTestWithLargeNumbers() throws Exception {
+        String requestBody = "{\"a\": 2147483645, \"b\": 1}";
+        mockMvc.perform(post("/sum")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result").value(2147483646));
+    }
+
+    @Test
+    public void sumTestWithNegativeNumbers() throws Exception {
+        String requestBody = "{\"a\": 2, \"b\": -3}";
+        mockMvc.perform(post("/sum")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result").value(-1));
+    }
+
+    @Test
+    public void sumTestWithExtraFields() throws Exception {
+        String requestBody = "{\"a\": 2, \"b\": 3, \"c\": 4}";
+        mockMvc.perform(post("/sum")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result").value(5));
+    }
 }

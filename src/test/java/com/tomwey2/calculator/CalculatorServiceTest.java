@@ -37,4 +37,18 @@ class CalculatorServiceTest {
     public void sumTestWithMinInteger() {
         assertEquals(Integer.MIN_VALUE, calculatorService.sum(Integer.MIN_VALUE, 0));
     }
+
+    @Test
+    public void sumTestWithOverflow() {
+        // Java does not throw ArithmeticException for integer overflow.
+        // Instead, it wraps around. Integer.MAX_VALUE + 1 becomes Integer.MIN_VALUE.
+        assertEquals(Integer.MIN_VALUE, calculatorService.sum(Integer.MAX_VALUE, 1));
+    }
+
+    @Test
+    public void sumTestWithUnderflow() {
+        // Java does not throw ArithmeticException for integer underflow.
+        // Instead, it wraps around. Integer.MIN_VALUE - 1 becomes Integer.MAX_VALUE.
+        assertEquals(Integer.MAX_VALUE, calculatorService.sum(Integer.MIN_VALUE, -1));
+    }
 }
