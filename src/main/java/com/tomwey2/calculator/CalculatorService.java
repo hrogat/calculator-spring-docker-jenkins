@@ -8,7 +8,7 @@ public class CalculatorService {
         return a + b;
     }
 
-    public double divide(int dividend, int divisor) {
+    public double division(int dividend, int divisor) {
         if (divisor == 0) {
             throw new IllegalArgumentException("Division by zero is not allowed");
         }

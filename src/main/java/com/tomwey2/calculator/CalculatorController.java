@@ -17,6 +17,6 @@ public class CalculatorController {
 
     @RequestMapping("/divide")
     String divide(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
-        return String.valueOf(calculatorService.divide(a, b));
+        return String.valueOf(calculatorService.division(a, b));
     }
 }
