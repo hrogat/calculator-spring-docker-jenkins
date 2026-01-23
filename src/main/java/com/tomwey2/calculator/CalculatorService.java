@@ -8,10 +8,10 @@ public class CalculatorService {
         return a + b;
     }
 
-    public double divide(int a, int b) {
-        if (b == 0) {
+    public double divide(int dividend, int divisor) {
+        if (divisor == 0) {
             throw new IllegalArgumentException("Division by zero is not allowed");
         }
-        return (double) a / b;
+        return (double) dividend / divisor;
     }
 }
