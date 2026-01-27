@@ -21,9 +21,9 @@ class CalculatorControllerIntegrationTest {
     @Test
     public void testSumWithValidInputs() {
         ResponseEntity<String> response = restTemplate.getForEntity(
-                "http://localhost:" + port + "/sum?a=5&b=3",
+                "http://localhost:" + port + "/sum?a=6&b=7",
                 String.class);
-        assertEquals("8", response.getBody());
+        assertEquals("13", response.getBody());
     }
 
     @Test
