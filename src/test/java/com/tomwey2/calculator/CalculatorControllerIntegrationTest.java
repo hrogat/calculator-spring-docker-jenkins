@@ -67,4 +67,13 @@ class CalculatorControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("3000000"));
     }
+
+    @Test
+    void testSumWith21And55() throws Exception {
+        mockMvc.perform(get("/sum")
+                        .param("a", "21")
+                        .param("b", "55"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("76"));
+    }
 }
