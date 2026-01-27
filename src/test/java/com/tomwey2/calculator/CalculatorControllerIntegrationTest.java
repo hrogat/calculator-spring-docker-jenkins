@@ -21,11 +21,11 @@ public class CalculatorControllerIntegrationTest {
     @Test
     public void testSumWithValidInputs() {
         ResponseEntity<String> response = restTemplate.getForEntity(
-                "http://localhost:" + port + "/sum?a=5&b=3",
+                "http://localhost:" + port + "/sum?a=7&b=8",
                 String.class
         );
         assertEquals(200, response.getStatusCodeValue());
-        assertEquals("8", response.getBody());
+        assertEquals("15", response.getBody());
     }
 
     @Test
@@ -41,11 +41,11 @@ public class CalculatorControllerIntegrationTest {
     @Test
     public void testSumWithNegativeValues() {
         ResponseEntity<String> response = restTemplate.getForEntity(
-                "http://localhost:" + port + "/sum?a=-5&b=-3",
+                "http://localhost:" + port + "/sum?a=-1&b=-2",
                 String.class
         );
         assertEquals(200, response.getStatusCodeValue());
-        assertEquals("-8", response.getBody());
+        assertEquals("-3", response.getBody());
     }
 
     @Test
