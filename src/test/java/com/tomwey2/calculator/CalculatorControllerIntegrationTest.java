@@ -44,4 +44,13 @@ class CalculatorControllerIntegrationTest {
                 .andExpect(content().string("-2"));
     }
 
+    @Test
+    void testSumWithFiveAndSeven() throws Exception {
+        mockMvc.perform(get("/sum")
+                        .param("a", "5")
+                        .param("b", "7"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("12"));
+    }
+
 }
