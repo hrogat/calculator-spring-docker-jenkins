@@ -35,8 +35,8 @@ class CalculatorApplicationTests {
     @Test
     void testBasicEndpointAvailability() {
         // Test that the basic endpoint is accessible
-        ResponseEntity<String> response = restTemplate.getForEntity("/sum?a=1&b=1", String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity("/sum?a=17&b=18", String.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals("2", response.getBody());
+        assertEquals("35", response.getBody());
     }
 }
