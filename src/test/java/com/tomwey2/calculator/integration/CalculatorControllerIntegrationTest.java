@@ -54,4 +54,11 @@ public class CalculatorControllerIntegrationTest {
         ResponseEntity<String> response = restTemplate.getForEntity("/sum", String.class);
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
+
+    @Test
+    public void testSumEndpointWithSeventeenAndEighteen() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/sum?a=17&b=18", String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("35", response.getBody());
+    }
 }
