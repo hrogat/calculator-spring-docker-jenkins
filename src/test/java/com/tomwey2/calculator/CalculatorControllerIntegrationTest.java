@@ -18,29 +18,34 @@ class CalculatorControllerIntegrationTest {
     private MockMvc mockMvc;
 
     @Test
-    void testSumWithValidInputs() throws Exception {
-        // Test basic addition
+    void testSumWithPositiveNumbers() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("a", "5")
                         .param("b", "3"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("8"));
+    }
 
-        // Test with negative numbers
+    @Test
+    void testSumWithNegativeAndPositiveNumbers() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("a", "-5")
                         .param("b", "10"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("5"));
+    }
 
-        // Test with zero
+    @Test
+    void testSumWithZeros() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("a", "0")
                         .param("b", "0"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("0"));
+    }
 
-        // Test with large numbers
+    @Test
+    void testSumWithLargeNumbers() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("a", "1000000")
                         .param("b", "2000000"))
@@ -49,37 +54,43 @@ class CalculatorControllerIntegrationTest {
     }
 
     @Test
-    void testSumWithMissingParameters() throws Exception {
-        // Test missing parameter a
+    void testSumWithMissingParameterA() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("b", "5"))
                 .andExpect(status().isBadRequest());
+    }
 
-        // Test missing parameter b
+    @Test
+    void testSumWithMissingParameterB() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("a", "5"))
                 .andExpect(status().isBadRequest());
+    }
 
-        // Test missing both parameters
+    @Test
+    void testSumWithMissingBothParameters() throws Exception {
         mockMvc.perform(get("/sum"))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    void testSumWithInvalidParameters() throws Exception {
-        // Test non-numeric parameter a
+    void testSumWithNonNumericParameterA() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("a", "abc")
                         .param("b", "5"))
                 .andExpect(status().isBadRequest());
+    }
 
-        // Test non-numeric parameter b
+    @Test
+    void testSumWithNonNumericParameterB() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("a", "5")
                         .param("b", "xyz"))
                 .andExpect(status().isBadRequest());
+    }
 
-        // Test both non-numeric parameters
+    @Test
+    void testSumWithBothNonNumericParameters() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("a", "abc")
                         .param("b", "xyz"))
@@ -87,15 +98,16 @@ class CalculatorControllerIntegrationTest {
     }
 
     @Test
-    void testSumWithEdgeCases() throws Exception {
-        // Test maximum integer values
+    void testSumWithMaxIntegerValue() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("a", String.valueOf(Integer.MAX_VALUE))
                         .param("b", "0"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(String.valueOf(Integer.MAX_VALUE)));
+    }
 
-        // Test minimum integer values
+    @Test
+    void testSumWithMinIntegerValue() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("a", String.valueOf(Integer.MIN_VALUE))
                         .param("b", "0"))
