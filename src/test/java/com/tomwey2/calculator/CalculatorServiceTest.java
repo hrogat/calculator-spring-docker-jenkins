@@ -14,9 +14,17 @@ class CalculatorServiceTest {
     }
 
     @Test
-    public void divideTest() {
+    public void divideTestWithEvenDivision() {
         assertEquals(2.0, calculatorService.divide(4, 2));
+    }
+
+    @Test
+    public void divideTestWithDecimalResult() {
         assertEquals(3.3333333333333335, calculatorService.divide(10, 3));
+    }
+
+    @Test
+    public void divideTestWithNegativeNumbers() {
         assertEquals(-2.5, calculatorService.divide(-5, 2));
     }
 
