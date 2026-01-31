@@ -18,40 +18,33 @@ class CalculatorControllerIntegrationTest {
     private MockMvc mockMvc;
 
     @Test
-    void testSumWithValidInputs() throws Exception {
+    void testSumEndpoint() throws Exception {
+        // Test valid inputs
         mockMvc.perform(get("/sum")
                         .param("a", "2")
                         .param("b", "3"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("5"));
-    }
 
-    @Test
-    void testSumWithMissingParameter() throws Exception {
+        // Test missing parameter
         mockMvc.perform(get("/sum")
                         .param("a", "2"))
                 .andExpect(status().isBadRequest());
-    }
 
-    @Test
-    void testSumWithNonNumericInput() throws Exception {
+        // Test non-numeric input
         mockMvc.perform(get("/sum")
                         .param("a", "abc")
                         .param("b", "3"))
                 .andExpect(status().isBadRequest());
-    }
 
-    @Test
-    void testSumWithNegativeNumbers() throws Exception {
+        // Test negative numbers
         mockMvc.perform(get("/sum")
                         .param("a", "-5")
                         .param("b", "10"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("5"));
-    }
 
-    @Test
-    void testSumWithZero() throws Exception {
+        // Test zero values
         mockMvc.perform(get("/sum")
                         .param("a", "0")
                         .param("b", "0"))
