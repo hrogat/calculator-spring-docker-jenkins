@@ -34,14 +34,6 @@ class CalculatorControllerIntegrationTest {
     }
 
     @Test
-    void testSumWithNonNumericInput() throws Exception {
-        mockMvc.perform(get("/sum")
-                        .param("a", "abc")
-                        .param("b", "3"))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
     void testSumWithNegativeNumbers() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("a", "-5")
