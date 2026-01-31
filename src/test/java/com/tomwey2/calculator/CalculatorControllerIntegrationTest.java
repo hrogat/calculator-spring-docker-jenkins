@@ -20,10 +20,10 @@ class CalculatorControllerIntegrationTest {
     @Test
     void testSumWithPositiveNumbers() throws Exception {
         mockMvc.perform(get("/sum")
-                        .param("a", "5")
-                        .param("b", "3"))
+                        .param("a", "7")
+                        .param("b", "9"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("8"));
+                .andExpect(content().string("16"));
     }
 
     @Test
@@ -65,14 +65,5 @@ class CalculatorControllerIntegrationTest {
                         .param("a", "abc")
                         .param("b", "def"))
                 .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void testSumWithSevenAndNine() throws Exception {
-        mockMvc.perform(get("/sum")
-                        .param("a", "7")
-                        .param("b", "9"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("16"));
     }
 }
