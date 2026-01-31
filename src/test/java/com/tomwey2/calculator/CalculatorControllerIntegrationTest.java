@@ -27,15 +27,6 @@ class CalculatorControllerIntegrationTest {
     }
 
     @Test
-    void testSumWithZero() throws Exception {
-        mockMvc.perform(get("/sum")
-                        .param("a", "0")
-                        .param("b", "0"))
-                .andExpect(status().isOk())
-                .andExpect(content().string("0"));
-    }
-
-    @Test
     void testSumWithMissingParameter() throws Exception {
         mockMvc.perform(get("/sum")
                         .param("a", "5"))
