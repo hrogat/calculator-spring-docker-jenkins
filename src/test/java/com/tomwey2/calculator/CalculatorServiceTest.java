@@ -13,4 +13,20 @@ class CalculatorServiceTest {
         assertEquals(5, calculatorService.sum(2, 3));
     }
 
+    @Test
+    public void divideTest() {
+        assertEquals(5.0, calculatorService.divide(10, 2));
+    }
+
+    @Test
+    public void divideWithRemainderTest() {
+        assertEquals(2.5, calculatorService.divide(5, 2));
+    }
+
+    @Test
+    public void divideByZeroTest() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            calculatorService.divide(10, 0);
+        });
+    }
 }
