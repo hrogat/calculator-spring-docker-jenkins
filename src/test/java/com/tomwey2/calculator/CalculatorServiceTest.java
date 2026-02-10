@@ -1,16 +1,27 @@
 package com.tomwey2.calculator;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorServiceTest {
-
-    private CalculatorService calculatorService = new CalculatorService();
+    private final CalculatorService calculatorService = new CalculatorService();
 
     @Test
-    public void sumTest() {
+    void sum() {
         assertEquals(5, calculatorService.sum(2, 3));
     }
 
+    @Test
+    void divide() {
+        assertEquals(2.0, calculatorService.divide(4, 2));
+        assertEquals(2.5, calculatorService.divide(5, 2));
+    }
+
+    @Test
+    void divideByZero() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculatorService.divide(5, 0);
+        });
+        assertEquals("Division by zero is not allowed.", exception.getMessage());
+    }
 }
