@@ -13,6 +13,6 @@ public class CalculatorController {
 
     @RequestMapping("/sum")
     Mono<String> sum(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
-        return Mono.just(String.valueOf(calculatorService.sum(a, b)));
+        return calculatorService.sum(a, b).map(String::valueOf);
     }
 }
