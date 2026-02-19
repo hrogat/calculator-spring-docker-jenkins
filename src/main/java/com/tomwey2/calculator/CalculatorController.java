@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+/**
+ * Reactive WebFlux controller for calculator operations.
+ */
 @RestController
 public class CalculatorController {
     @Autowired
