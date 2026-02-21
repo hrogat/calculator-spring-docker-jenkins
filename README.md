@@ -8,6 +8,42 @@ Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API 
 - **Jenkins**: Automatisierte Builds und Deployments.
 - **Maven**: Build-Tool und Abhängigkeitsmanagement.
 
+## Architekturoverview
+Die Anwendung folgt einer **Layered Architecture** (Schichtenarchitektur):
+- **Controller Layer**: `CalculatorController` verarbeitet HTTP-Anfragen und delegiert die Geschäftslogik an die Service-Schicht.
+- **Service Layer**: `CalculatorService` enthält die Kernlogik für Berechnungen.
+- **Application Layer**: `CalculatorApplication` ist der Einstiegspunkt der Spring Boot-Anwendung.
+
+### Component Diagram
+```
++-------------------+       +-------------------+       +-------------------+
+| CalculatorController | ---> | CalculatorService   | ---> | Business Logic      |
++-------------------+       +-------------------+       +-------------------+
+```
+
+### Design Patterns
+- **MVC Pattern**: Die Anwendung verwendet das Model-View-Controller-Muster, wobei:
+  - `CalculatorController` als Controller agiert.
+  - `CalculatorService` als Model agiert.
+  - Die REST-API-Antworten als View fungieren.
+- **Dependency Injection**: Spring Boot verwaltet Abhängigkeiten automatisch und sorgt für eine lockere Kopplung.
+
+### Data Flow
+1. Eine HTTP-Anfrage wird von `CalculatorController` empfangen.
+2. Die Anfrageparameter werden an `CalculatorService` weitergeleitet.
+3. `CalculatorService` führt die Berechnung durch und gibt das Ergebnis zurück.
+4. `CalculatorController` gibt das Ergebnis als HTTP-Antwort zurück.
+
+### Error Handling
+- Fehler werden mit den integrierten Mechanismen von Spring Boot behandelt.
+- Benutzerdefinierte Ausnahmen können für spezifische Fehlerfälle (z. B. Division durch Null) hinzugefügt werden.
+- Es werden HTTP-Statuscodes für verschiedene Fehlerszenarien zurückgegeben (z. B. 400 für ungültige Eingaben).
+
+### Scalability and Extensibility
+- Die Anwendung kann horizontal mit Docker-Containern skaliert werden.
+- Neue Funktionen können durch das Hinzufügen neuer Endpunkte in `CalculatorController` und Methoden in `CalculatorService` erweitert werden.
+- Neue Operationen (z. B. Potenzierung, Wurzelziehen) können einfach nach dem bestehenden Muster hinzugefügt werden.
+
 ## Funktionalität
 Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation und Division. Die API kann über HTTP-Endpunkte aufgerufen werden.
 
