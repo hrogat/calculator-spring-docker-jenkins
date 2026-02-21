@@ -1,15 +1,96 @@
 # Calculator Spring Boot Application mit Docker und Jenkins
 
-Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API verfügbar ist. Das Projekt ist mit Docker containerisiert und verwendet Jenkins für die CI/CD-Pipeline.
+Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API verfügbar ist. Das Projekt folgt einer **Layered Architecture** (Controller, Service) und ist mit Docker containerisiert. Jenkins wird für die CI/CD-Pipeline verwendet, um automatisierte Builds, Tests und Deployments zu ermöglichen.
 
-## Technologien
-- **Spring Boot**: Framework für die Java-Anwendung.
-- **Docker**: Containerisierung der Anwendung.
-- **Jenkins**: Automatisierte Builds und Deployments.
-- **Maven**: Build-Tool und Abhängigkeitsmanagement.
+---
 
-## Funktionalität
-Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation und Division. Die API kann über HTTP-Endpunkte aufgerufen werden.
+## Architekturübersicht
+Dieses Projekt folgt einer **Layered Architecture** mit den folgenden Schichten:
+- **Controller Layer**: Behandelt HTTP-Anfragen und -Antworten.
+- **Service Layer**: Enthält die Geschäftslogik für die Rechenoperationen.
+
+Ein einfaches Diagramm der Architektur:
+```
+┌───────────────────────┐
+│      Client          │
+└───────────┬─────────┘
+              │
+              ▼
+┌───────────────────────┐
+│   CalculatorController│
+└───────────┬─────────┘
+              │
+              ▼
+┌───────────────────────┐
+│   CalculatorService   │
+└───────────────────────┘
+```
+
+---
+
+## Komponenteninteraktion
+Der `CalculatorController` empfängt HTTP-Anfragen und delegiert die Geschäftslogik an den `CalculatorService`. Der `CalculatorService` führt die Berechnungen durch und gibt das Ergebnis an den Controller zurück. Die Anwendung verwendet derzeit keine Datenbank.
+
+---
+
+## Design Patterns und Prinzipien
+- **MVC (Model-View-Controller)**: Der `CalculatorController` fungiert als Controller, und der `CalculatorService` als Model. Die "View" ist die HTTP-Antwort an den Client.
+- **Dependency Injection (DI)**: Spring's `@Autowired` wird verwendet, um den `CalculatorService` in den `CalculatorController` zu injizieren.
+- **Service Layer Pattern**: Die Geschäftslogik ist im `CalculatorService` gekapselt.
+
+---
+
+## Technologie-Stack im Detail
+- **Spring Boot**: Vereinfacht die Entwicklung von REST-APIs, Dependency Injection und Anwendungskonfiguration.
+- **Maven**: Build-Tool und Abhängigkeitsmanagement. Gewährleistet konsistente Builds und Dependency-Resolution.
+- **Docker**: Containerisierungstechnologie, um die Anwendung und ihre Abhängigkeiten in einem portablen Container zu verpacken. Gewährleistet Konsistenz über verschiedene Umgebungen hinweg.
+- **Jenkins**: CI/CD-Tool für automatisierte Builds, Tests und Deployments. Die `Jenkinsfile` definiert die Pipeline für dieses Projekt.
+
+---
+
+## API-Design
+Die Anwendung bietet folgende RESTful-Endpunkte:
+- **Addition**: `GET /sum?a={a}&b={b}`
+  Beispiel: `GET /sum?a=5&b=3` → Ergebnis: `"8"`
+
+Die API folgt RESTful-Prinzipien, gibt jedoch derzeit eine einfache Zeichenkette als Antwort zurück. Dies könnte in Zukunft auf JSON umgestellt werden.
+
+---
+
+## Fehlerbehandlung
+Aktuell gibt es **keine explizite Fehlerbehandlung** in der Anwendung. Mögliche Probleme:
+- Division durch Null führt zu einer `ArithmeticException`.
+- Ungültige Eingaben (z. B. Nicht-Ganzzahlen) führen zu einer `MethodArgumentTypeMismatchException`.
+
+**Zukünftige Verbesserungen**:
+- Verwendung von `@ExceptionHandler` in Spring, um benutzerdefinierte Fehlerantworten (z. B. HTTP 400 für ungültige Eingaben) zu implementieren.
+
+---
+
+## Teststrategie
+- **Unit Tests**: Die Klasse `CalculatorServiceTest` enthält Unit-Tests für die Geschäftslogik im `CalculatorService`.
+- **Integration Tests**: Die Klasse `CalculatorApplicationTests` enthält Integrationstests für die Anwendung.
+
+Tests können mit folgendem Befehl ausgeführt werden:
+```bash
+mvn test
+```
+
+**Zukünftige Verbesserungen**:
+- Erweiterung der Tests um Edge-Cases (z. B. Division durch Null, große Zahlen).
+- Hinzufügen von API-Tests mit Tools wie Postman oder RestAssured.
+
+---
+
+## Bereitstellungsarchitektur
+Die Anwendung ist mit Docker containerisiert und kann lokal oder in einer Cloud-Umgebung bereitgestellt werden. Die `Dockerfile` definiert das Container-Image.
+
+Die Jenkins-Pipeline (definiert in der `Jenkinsfile`) automatisiert:
+- Builds bei Code-Änderungen.
+- Ausführung von Tests.
+- Erstellung und Bereitstellung des Docker-Images.
+
+---
 
 ## Projektstruktur
 ```
@@ -24,19 +105,23 @@ Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addit
 │   │       └── application.properties       # Konfiguration der Anwendung
 │   └── test
 │       └── java/com/tomwey2/calculator
-│           ├── CalculatorApplicationTests.java  # Tests für die Anwendung
-│           └── CalculatorServiceTest.java       # Tests für die Rechenlogik
+│           ├── CalculatorApplicationTests.java  # Integrationstests
+│           └── CalculatorServiceTest.java       # Unit-Tests für die Rechenlogik
 ├── Dockerfile                                # Docker-Konfiguration
 ├── Jenkinsfile                               # Jenkins-Pipeline
 ├── pom.xml                                   # Maven-Konfiguration
 └── README.md                                 # Projektbeschreibung
 ```
 
+---
+
 ## Voraussetzungen
-- Java 11 oder höher
+- Java 21 oder höher
 - Maven
 - Docker
 - Jenkins (optional, für CI/CD)
+
+---
 
 ## Installation und Ausführung
 ### Lokale Ausführung
@@ -69,28 +154,13 @@ Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addit
    ```
    Die Anwendung ist nun unter `http://localhost:8080` verfügbar.
 
-### CI/CD mit Jenkins
-Das Projekt enthält eine `Jenkinsfile`, die für die automatisierte Build- und Deployment-Pipeline verwendet werden kann. Stelle sicher, dass Jenkins korrekt konfiguriert ist, um die Pipeline auszuführen.
+---
 
-## Tests
-Die Anwendung enthält Unit-Tests für die Rechenlogik und Integrationstests für die API. Um die Tests auszuführen, verwende den folgenden Befehl:
-```bash
-mvn test
-```
-
-## API-Endpunkte
-Die Anwendung bietet folgende Endpunkte:
-- **Addition**: `GET /api/calculate/add?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/add?a=5&b=3` → Ergebnis: `8`
-
-- **Subtraktion**: `GET /api/calculate/subtract?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/subtract?a=5&b=3` → Ergebnis: `2`
-
-- **Multiplikation**: `GET /api/calculate/multiply?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/multiply?a=5&b=3` → Ergebnis: `15`
-
-- **Division**: `GET /api/calculate/divide?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/divide?a=6&b=3` → Ergebnis: `2`
-
-## Lizenz
-Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für weitere Informationen.
+## Zukünftige Verbesserungen
+- **Fehlerbehandlung**: Implementierung von benutzerdefinierten Fehlerantworten und HTTP-Statuscodes.
+- **API-Design**: Verwendung von JSON für Anfragen und Antworten.
+- **Eingabevalidierung**: Validierung der Query-Parameter (z. B. Prüfung auf `null`-Werte).
+- **Logging**: Hinzufügen von Logging für Debugging und Monitoring.
+- **API-Dokumentation**: Integration von Swagger/OpenAPI für interaktive API-Dokumentation.
+- **Standardisierung der API-Endpunkte**: Verwendung einer konsistenten Namenskonvention (z. B. `/api/calculate/sum`).
+- **Skalierbarkeit**: Hinzufügen von Caching für häufige Berechnungen.
