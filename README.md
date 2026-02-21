@@ -8,6 +8,14 @@ Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API 
 - **Jenkins**: Automatisierte Builds und Deployments.
 - **Maven**: Build-Tool und Abhängigkeitsmanagement.
 
+## Architektur
+Die Anwendung folgt einer **Layer-Architektur** mit klaren Verantwortlichkeiten:
+- **Controller-Layer**: Enthält die REST-Endpunkte und ist für die Verarbeitung von HTTP-Anfragen zuständig (`CalculatorController`).
+- **Service-Layer**: Beinhaltet die Geschäftslogik und Rechenoperationen (`CalculatorService`).
+- **Modularität**: Jede Schicht ist streng getrennt, um die Wartbarkeit und Skalierbarkeit zu gewährleisten.
+
+Die Anwendung nutzt **Constructor Injection** (mit Lombok `@RequiredArgsConstructor`) für die Abhängigkeitsinjektion, um sauberen und wartbaren Code zu fördern.
+
 ## Funktionalität
 Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation und Division. Die API kann über HTTP-Endpunkte aufgerufen werden.
 
