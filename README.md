@@ -32,6 +32,79 @@ Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addit
 └── README.md                                 # Projektbeschreibung
 ```
 
+---
+
+## Architecture
+
+### High-Level Architecture
+Die Anwendung folgt einer **Layered Architecture** mit den folgenden Komponenten:
+- **Controller Layer**: Behandelt HTTP-Anfragen und -Antworten (`CalculatorController`).
+- **Service Layer**: Enthält die Geschäftslogik (`CalculatorService`).
+
+Die Anwendung hält sich an das **MVC (Model-View-Controller)**-Muster, wobei der Controller die Anfragen entgegennimmt und die Service-Schicht die Geschäftslogik ausführt.
+
+
+### Architectural Diagram
+```
++-------------------+       +-------------------+
+|   Controller     | ----> |     Service       |
+| (CalculatorController) |       | (CalculatorService) |
++-------------------+       +-------------------+
+        ^                                      |
+        |                                      v
++-------------------+       +-------------------+
+|      HTTP         |       |   Business Logic   |
+|   Request/Response|       |   (Arithmetic      |
++-------------------+       |    Operations)     |
+                                    +-------------------+
+```
+
+
+### Component Interaction
+Der `CalculatorController` empfängt HTTP-Anfragen und delegiert die Berechnungslogik an den `CalculatorService`. Der `CalculatorService` führt die arithmetische Operation durch und gibt das Ergebnis an den Controller zurück, welcher es als HTTP-Antwort an den Client sendet.
+
+
+### Design Patterns
+- **MVC Pattern**: Trennt die Verantwortlichkeiten in Controller (Anfragenbehandlung) und Service (Geschäftslogik).
+- **Dependency Injection**: Spring Boot’s `@Autowired` wird verwendet, um den `CalculatorService` in den `CalculatorController` zu injizieren.
+
+
+### Data Flow
+1. HTTP-Anfrage → `CalculatorController`
+2. `CalculatorController` → `CalculatorService`
+3. `CalculatorService` führt die Operation durch
+4. `CalculatorService` → `CalculatorController`
+5. `CalculatorController` → HTTP-Antwort
+
+
+### Error Handling
+Die aktuelle Implementierung enthält keine explizite Fehlerbehandlung für ungültige Eingaben (z. B. nicht-numerische Werte oder Division durch Null). Dies sollte in zukünftigen Iterationen verbessert werden.
+
+
+### Security
+- Es gibt keine Implementierung von Authentifizierung oder Autorisierung.
+- Die Eingabevalidierung ist minimal (z. B. keine Überprüfung auf `null` oder nicht-numerische Werte).
+
+
+### Key Dependencies
+- **Spring Boot Starter Web**: Zum Erstellen von RESTful APIs.
+- **Spring Boot Starter Test**: Für das Testen der Anwendung.
+- **Jacoco**: Für die Berichterstattung zur Code-Abdeckung.
+- **Checkstyle**: Zur Einhaltung von Coding-Standards.
+
+
+### Deployment Architecture
+Die Anwendung ist mit Docker containerisiert und kann als eigenständiger Service bereitgestellt werden. Jenkins wird für CI/CD verwendet, um Builds und Deployments zu automatisieren.
+
+
+### Future Improvements
+- Implementierung von Eingabevalidierung und Fehlerbehandlung.
+- Erweiterung der Service-Schicht um weitere Operationen (z. B. Subtraktion, Multiplikation, Division).
+- Hinzufügen von Logging für Debugging und Monitoring.
+- Einführung einer Datenbank, falls persistente Speicherung benötigt wird.
+
+---
+
 ## Voraussetzungen
 - Java 11 oder höher
 - Maven
