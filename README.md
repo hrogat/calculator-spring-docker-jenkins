@@ -8,6 +8,36 @@ Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API 
 - **Jenkins**: Automatisierte Builds und Deployments.
 - **Maven**: Build-Tool und Abhängigkeitsmanagement.
 
+## Architektürübersicht
+
+### Schichtenarchitektur
+Die Anwendung folgt einer Schichtenarchitektur:
+- **Controller-Schicht**: Verantwortlich für die Verarbeitung von HTTP-Anfragen und -Antworten. Die Controller delegieren die Geschäftslogik an die Service-Schicht.
+- **Service-Schicht**: Enthält die Kernlogik der Anwendung, z. B. die Berechnungslogik.
+
+### Spring Boot-Komponenten
+- `@RestController`: Markiert die Klasse `CalculatorController` als REST-Controller, der HTTP-Anfragen verarbeitet.
+- `@Service`: Kennzeichnet die Klasse `CalculatorService` als Service, der Geschäftslogik enthält.
+- `@Autowired`: Wird für die Dependency Injection verwendet, um den Controller mit dem Service zu verbinden.
+
+### API-Design
+Die Anwendung folgt RESTful-Prinzipien:
+- Endpunkte sind ressourcenorientiert und intuitiv gestaltet (z. B. `/api/calculate/add` für Addition).
+- Anfragen verwenden Query-Parameter für die Eingabe (z. B. `/api/calculate/add?a=5&b=3`).
+- Antworten werden als Klartext zurückgegeben, um die Einfachheit zu gewährleisten.
+
+### Erweiterbarkeit
+Um eine neue Operation hinzuzufügen, sind folgende Schritte erforderlich:
+1. Füge eine Methode zur Klasse `CalculatorService` hinzu.
+2. Erstelle einen neuen Endpunkt in der Klasse `CalculatorController`.
+
+### Fehlerbehandlung
+Derzeit enthält die Anwendung keine explizite Fehlerbehandlung. Beispielsweise führt eine Division durch Null zu einer Laufzeitausnahme.
+
+### Teststrategie
+- Unit-Tests für die Service-Logik (z. B. `CalculatorServiceTest`).
+- Integrationstests für die API-Endpunkte (z. B. `CalculatorApplicationTests`).
+
 ## Funktionalität
 Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation und Division. Die API kann über HTTP-Endpunkte aufgerufen werden.
 
