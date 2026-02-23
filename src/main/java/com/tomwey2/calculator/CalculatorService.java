@@ -1,10 +1,28 @@
 package com.tomwey2.calculator;
 
-import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+import java.lang.IllegalArgumentException;
 
-@Service
+@RequiredArgsConstructor
 public class CalculatorService {
-    public int sum(int a, int b) {
+    
+    public double add(double a, double b) {
         return a + b;
+    }
+
+    public double subtract(double a, double b) {
+        return a - b;
+    }
+
+    public double multiply(double a, double b) {
+        return a * b;
+    }
+
+    // New method for division
+    public double divide(double a, double b) {
+        if (b == 0) {
+            throw new IllegalArgumentException("Division by zero");
+        }
+        return a / b;
     }
 }
