@@ -9,7 +9,7 @@ Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API 
 - **Maven**: Build-Tool und Abhängigkeitsmanagement.
 
 ## Funktionalität
-Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation und Division. Die API kann über HTTP-Endpunkte aufgerufen werden.
+Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition. Die API kann über HTTP-Endpunkte aufgerufen werden.
 
 ## Projektstruktur
 ```
@@ -79,18 +79,9 @@ mvn test
 ```
 
 ## API-Endpunkte
-Die Anwendung bietet folgende Endpunkte:
-- **Addition**: `GET /api/calculate/add?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/add?a=5&b=3` → Ergebnis: `8`
-
-- **Subtraktion**: `GET /api/calculate/subtract?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/subtract?a=5&b=3` → Ergebnis: `2`
-
-- **Multiplikation**: `GET /api/calculate/multiply?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/multiply?a=5&b=3` → Ergebnis: `15`
-
-- **Division**: `GET /api/calculate/divide?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/divide?a=6&b=3` → Ergebnis: `2`
+Die Anwendung bietet folgenden Endpunkt:
+- **Addition**: `GET /sum?a={a}&b={b}`
+  Beispiel: `GET /sum?a=5&b=3` → Ergebnis: `8`
 
 ## Lizenz
 Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für weitere Informationen.
