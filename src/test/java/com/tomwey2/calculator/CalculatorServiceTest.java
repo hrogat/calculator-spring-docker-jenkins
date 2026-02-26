@@ -1,16 +1,18 @@
 package com.tomwey2.calculator;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import reactor.core.publisher.Mono;
+import reactor.test.StepVerifier;
 
 class CalculatorServiceTest {
 
-    private CalculatorService calculatorService = new CalculatorService();
+    private final CalculatorService calculatorService = new CalculatorService();
 
     @Test
     public void sumTest() {
-        assertEquals(5, calculatorService.sum(2, 3));
+        Mono<Integer> result = calculatorService.sum(2, 3);
+        StepVerifier.create(result)
+                .expectNext(5)
+                .verifyComplete();
     }
-
 }
