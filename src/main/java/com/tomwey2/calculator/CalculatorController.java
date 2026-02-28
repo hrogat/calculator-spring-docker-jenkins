@@ -14,4 +14,13 @@ public class CalculatorController {
     String sum(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
         return String.valueOf(calculatorService.sum(a, b));
     }
+
+    @RequestMapping("/divide")
+    String divide(@RequestParam("a") Integer a, @RequestParam("b") Integer b) {
+        try {
+            return String.valueOf(calculatorService.divide(a, b));
+        } catch (IllegalArgumentException e) {
+            return e.getMessage();
+        }
+    }
 }
