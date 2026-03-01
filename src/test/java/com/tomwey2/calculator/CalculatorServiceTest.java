@@ -1,6 +1,7 @@
 package com.tomwey2.calculator;
 
 import org.junit.jupiter.api.Test;
+import reactor.test.StepVerifier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,7 +11,9 @@ class CalculatorServiceTest {
 
     @Test
     public void sumTest() {
-        assertEquals(5, calculatorService.sum(2, 3));
+        StepVerifier.create(calculatorService.sum(2, 3))
+                .expectNext(5)
+                .verifyComplete();
     }
 
 }
