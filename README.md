@@ -8,6 +8,22 @@ Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API 
 - **Jenkins**: Automatisierte Builds und Deployments.
 - **Maven**: Build-Tool und Abhängigkeitsmanagement.
 
+## Architektur Overview
+The application follows a **layered architecture** with clear separation of concerns:
+- **Controller Layer**: Handles HTTP requests and responses (`CalculatorController`).
+- **Service Layer**: Contains business logic (`CalculatorService`).
+- **Configuration**: Managed via `application.properties`.
+
+The project leverages **Spring Boot's Dependency Injection** to manage component interactions, ensuring loose coupling and testability. The RESTful API design adheres to standard HTTP methods and status codes.
+
+### Component Interactions
+- The `CalculatorController` exposes REST endpoints and delegates operations to the `CalculatorService`.
+- The `CalculatorService` performs the actual calculations and returns results to the controller.
+
+### Error Handling
+- The application handles exceptions such as division by zero by returning appropriate HTTP error responses.
+- Spring Boot's `@ControllerAdvice` can be used to centralize exception handling (not yet implemented).
+
 ## Funktionalität
 Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation und Division. Die API kann über HTTP-Endpunkte aufgerufen werden.
 
@@ -31,6 +47,12 @@ Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addit
 ├── pom.xml                                   # Maven-Konfiguration
 └── README.md                                 # Projektbeschreibung
 ```
+
+### Updated Project Structure Explanation
+- **Controller Layer**: `CalculatorController.java` handles HTTP requests and delegates logic to the service layer.
+- **Service Layer**: `CalculatorService.java` contains the core business logic for calculations.
+- **Configuration**: `application.properties` manages application settings.
+- **Tests**: Unit and integration tests are located in the `test` directory.
 
 ## Voraussetzungen
 - Java 11 oder höher
@@ -70,13 +92,26 @@ Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addit
    Die Anwendung ist nun unter `http://localhost:8080` verfügbar.
 
 ### CI/CD mit Jenkins
+The Jenkins pipeline automates the following stages:
+1. **Build**: Compiles the application and runs unit tests.
+2. **Test**: Executes integration tests and code quality checks (Checkstyle, JaCoCo).
+3. **Deploy**: Deploys the application to a Docker container.
+
 Das Projekt enthält eine `Jenkinsfile`, die für die automatisierte Build- und Deployment-Pipeline verwendet werden kann. Stelle sicher, dass Jenkins korrekt konfiguriert ist, um die Pipeline auszuführen.
 
 ## Tests
-Die Anwendung enthält Unit-Tests für die Rechenlogik und Integrationstests für die API. Um die Tests auszuführen, verwende den folgenden Befehl:
+The application contains:
+- **Unit Tests**: Cover core logic in `CalculatorService` using JUnit and Mockito.
+- **Integration Tests**: Verify API endpoints and their interactions with the service layer.
+
+Um die Tests auszuführen, verwende den folgenden Befehl:
 ```bash
 mvn test
 ```
+
+## Scalability and Performance
+- The REST API is stateless, allowing for horizontal scaling.
+- Future optimizations may include caching frequent calculations and load balancing.
 
 ## API-Endpunkte
 Die Anwendung bietet folgende Endpunkte:
