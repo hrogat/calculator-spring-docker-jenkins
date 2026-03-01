@@ -1,96 +1,158 @@
-# Calculator Spring Boot Application mit Docker und Jenkins
+# Calculator Spring Boot Application with Docker and Jenkins
 
-Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API verfügbar ist. Das Projekt ist mit Docker containerisiert und verwendet Jenkins für die CI/CD-Pipeline.
+A simple calculator application built with Spring Boot, exposed as a REST API. The project is containerized using Docker and includes a Jenkins CI/CD pipeline for automated builds and deployments.
 
-## Technologien
-- **Spring Boot**: Framework für die Java-Anwendung.
-- **Docker**: Containerisierung der Anwendung.
-- **Jenkins**: Automatisierte Builds und Deployments.
-- **Maven**: Build-Tool und Abhängigkeitsmanagement.
+---
 
-## Funktionalität
-Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation und Division. Die API kann über HTTP-Endpunkte aufgerufen werden.
+## Technologies
+This project leverages the following technologies:
+- **Spring Boot**: Enables rapid development with auto-configuration, an embedded server (Tomcat), and a robust ecosystem for building RESTful APIs.
+- **Maven**: Manages dependencies and automates the build process.
+- **Docker**: Ensures consistent deployment across environments by containerizing the application.
+- **Jenkins**: Automates testing and deployment via a CI/CD pipeline.
+- **JUnit 5**: Provides a framework for writing and executing unit tests.
+- **JaCoCo**: Measures code coverage to ensure test effectiveness.
+- **Checkstyle**: Enforces coding standards and best practices.
 
-## Projektstruktur
+---
+
+## Architecture Overview
+This application follows a **Layered Architecture** with the following components:
+- **Controller Layer**: Handles HTTP requests and responses (e.g., `CalculatorController`).
+- **Service Layer**: Contains business logic (e.g., `CalculatorService`).
+- **No Repository Layer**: There is no database interaction in the current implementation.
+
+The architecture adheres to the **Spring Boot MVC** pattern, ensuring separation of concerns and maintainability.
+
+---
+
+## Component Interaction
+The `CalculatorController` receives HTTP requests and delegates the calculation logic to the `CalculatorService`. The result is returned as a plain text response. **Dependency Injection (DI)** is used to inject the `CalculatorService` into the `CalculatorController`, promoting loose coupling and testability.
+
+---
+
+## Design Patterns
+The application employs the following design patterns:
+- **Dependency Injection (DI)**: Spring manages dependencies, allowing for flexible and testable code.
+- **Singleton Pattern**: Spring beans (`@Service`, `@RestController`) are singletons by default, ensuring a single instance per application context.
+- **MVC Pattern**: Separates concerns between the Controller (handling requests) and Service (business logic).
+
+---
+
+## API Design
+The application exposes a RESTful API with the following endpoint:
+- **Sum**: `GET /sum?a={a}&b={b}`
+  Example: `GET /sum?a=5&b=3` → Response: `8`
+
+The API follows RESTful principles, including statelessness and resource-based URLs. Requests are made via HTTP GET with query parameters, and responses are returned as plain text.
+
+> **Note**: The `README.md` previously mentioned unimplemented endpoints (`add`, `subtract`, `multiply`, `divide`). These have been removed to avoid confusion, as only the `/sum` endpoint is currently implemented.
+
+---
+
+## Error Handling
+Currently, the application does not implement explicit error handling. Future improvements include:
+- Input validation for query parameters (e.g., ensuring `a` and `b` are valid integers).
+- Exception handling for invalid inputs (e.g., `IllegalArgumentException` for division by zero or non-integer values).
+
+---
+
+## Testing Strategy
+The application includes the following testing approaches:
+- **Unit Tests**: `CalculatorServiceTest` verifies the business logic in isolation.
+- **Integration Tests**: Planned for future implementation to test the API endpoints.
+- **Code Coverage**: JaCoCo is configured to measure test coverage and ensure test effectiveness.
+
+To execute the tests, run:
+```bash
+mvn test
+```
+
+---
+
+## Deployment Architecture
+The application is designed for containerized deployment:
+- **Docker**: The application is packaged as a Docker image for consistent deployment across environments.
+- **Jenkins**: A CI/CD pipeline automates builds, tests, and deployments. The `Jenkinsfile` defines the pipeline stages, including:
+  - **Build**: Compiles the application and runs tests.
+  - **Test**: Executes unit tests and generates code coverage reports.
+  - **Deploy**: Deploys the application to a target environment (e.g., Docker container).
+
+---
+
+## Project Structure
 ```
 .
 ├── src
 │   ├── main
 │   │   ├── java/com/tomwey2/calculator
-│   │   │   ├── CalculatorApplication.java  # Hauptklasse der Spring Boot-Anwendung
-│   │   │   ├── CalculatorController.java    # REST-Controller für die API
-│   │   │   └── CalculatorService.java       # Logik für die Rechenoperationen
+│   │   │   ├── CalculatorApplication.java  # Main Spring Boot application class
+│   │   │   ├── CalculatorController.java    # REST Controller for the API
+│   │   │   └── CalculatorService.java       # Business logic for calculations
 │   │   └── resources
-│   │       └── application.properties       # Konfiguration der Anwendung
+│   │       └── application.properties       # Application configuration
 │   └── test
 │       └── java/com/tomwey2/calculator
-│           ├── CalculatorApplicationTests.java  # Tests für die Anwendung
-│           └── CalculatorServiceTest.java       # Tests für die Rechenlogik
-├── Dockerfile                                # Docker-Konfiguration
-├── Jenkinsfile                               # Jenkins-Pipeline
-├── pom.xml                                   # Maven-Konfiguration
-└── README.md                                 # Projektbeschreibung
+│           ├── CalculatorApplicationTests.java  # Integration tests
+│           └── CalculatorServiceTest.java       # Unit tests for business logic
+├── Dockerfile                                # Docker configuration
+├── Jenkinsfile                               # Jenkins CI/CD pipeline
+├── pom.xml                                   # Maven configuration
+└── README.md                                 # Project documentation
 ```
 
-## Voraussetzungen
-- Java 11 oder höher
+---
+
+## Future Improvements
+The following enhancements are planned for future iterations:
+- Implement missing API endpoints (`add`, `subtract`, `multiply`, `divide`).
+- Add input validation and error handling for robust API responses.
+- Introduce logging for debugging and monitoring.
+- Add integration tests for API endpoints.
+- Consider adding a database for persistent storage if needed.
+
+---
+
+## Prerequisites
+- Java 21 or higher
 - Maven
 - Docker
-- Jenkins (optional, für CI/CD)
+- Jenkins (optional, for CI/CD)
 
-## Installation und Ausführung
-### Lokale Ausführung
-1. Klone das Repository:
+---
+
+## Installation and Execution
+### Local Execution
+1. Clone the repository:
    ```bash
    git clone https://github.com/tomwey2/calculator-spring-docker-jenkins.git
    ```
-2. Navigiere in das Projektverzeichnis:
+2. Navigate to the project directory:
    ```bash
    cd calculator-spring-docker-jenkins
    ```
-3. Baue die Anwendung mit Maven:
+3. Build the application with Maven:
    ```bash
    mvn clean install
    ```
-4. Starte die Anwendung:
+4. Start the application:
    ```bash
    mvn spring-boot:run
    ```
-   Die Anwendung ist nun unter `http://localhost:8080` verfügbar.
+   The application will be available at `http://localhost:8080`.
 
-### Ausführung mit Docker
-1. Baue das Docker-Image:
+### Docker Execution
+1. Build the Docker image:
    ```bash
    docker build -t calculator-spring-app .
    ```
-2. Starte den Container:
+2. Start the container:
    ```bash
    docker run -p 8080:8080 calculator-spring-app
    ```
-   Die Anwendung ist nun unter `http://localhost:8080` verfügbar.
+   The application will be available at `http://localhost:8080`.
 
-### CI/CD mit Jenkins
-Das Projekt enthält eine `Jenkinsfile`, die für die automatisierte Build- und Deployment-Pipeline verwendet werden kann. Stelle sicher, dass Jenkins korrekt konfiguriert ist, um die Pipeline auszuführen.
+---
 
-## Tests
-Die Anwendung enthält Unit-Tests für die Rechenlogik und Integrationstests für die API. Um die Tests auszuführen, verwende den folgenden Befehl:
-```bash
-mvn test
-```
-
-## API-Endpunkte
-Die Anwendung bietet folgende Endpunkte:
-- **Addition**: `GET /api/calculate/add?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/add?a=5&b=3` → Ergebnis: `8`
-
-- **Subtraktion**: `GET /api/calculate/subtract?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/subtract?a=5&b=3` → Ergebnis: `2`
-
-- **Multiplikation**: `GET /api/calculate/multiply?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/multiply?a=5&b=3` → Ergebnis: `15`
-
-- **Division**: `GET /api/calculate/divide?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/divide?a=6&b=3` → Ergebnis: `2`
-
-## Lizenz
-Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für weitere Informationen.
+## License
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for more information.
