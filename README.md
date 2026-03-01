@@ -8,6 +8,31 @@ Ein einfacher Taschenrechner als Spring Boot-Anwendung, der über eine REST-API 
 - **Jenkins**: Automatisierte Builds und Deployments.
 - **Maven**: Build-Tool und Abhängigkeitsmanagement.
 
+## Architektürübersicht
+
+### Geschichtete Architektur
+Die Anwendung folgt einer geschichteten Architektur:
+- **Controller-Schicht**: Die Klasse `CalculatorController` verarbeitet HTTP-Anfragen und delegiert die Geschäftslogik an die Service-Schicht.
+- **Service-Schicht**: Die Klasse `CalculatorService` enthält die Kernlogik für die Durchführung von Berechnungen.
+
+### Entwurfsmuster
+- **Dependency Injection**: Spring Boots `@Autowired`-Annotation wird verwendet, um Abhängigkeiten, wie den `CalculatorService`, in den `CalculatorController` einzubinden.
+- **RESTful-API-Design**: Die Anwendung folgt REST-Konventionen für die Benennung von Endpunkten und Abfrageparametern.
+
+### API-Design
+Die API ist nach REST-Konventionen gestaltet:
+- Endpunkte werden basierend auf der durchgeführten Operation benannt (z. B. `/api/calculate/add`).
+- Abfrageparameter werden für Eingabewerte verwendet (z. B. `a` und `b` für Operanden).
+- Antworten werden als einfacher Text zurückgegeben.
+
+### Fehlerbehandlung
+- Ungültige Eingaben (z. B. nicht-numerische Werte) werden durch den Standard-Fehlerbehandlungsmechanismus von Spring Boot behandelt.
+- Division durch Null wird in der aktuellen Implementierung nicht explizit behandelt, kann aber in Zukunft hinzugefügt werden.
+
+### Skalierbarkeit und Erweiterbarkeit
+- Die geschichtete Architektur ermöglicht das einfache Hinzufügen neuer Operationen durch Erweiterung des `CalculatorService` und das Hinzufügen entsprechender Endpunkte im `CalculatorController`.
+- Die Anwendung kann mit Docker containerisiert und in skalierbaren Umgebungen bereitgestellt werden.
+
 ## Funktionalität
 Die Anwendung bietet eine REST-API für grundlegende Rechenoperationen wie Addition, Subtraktion, Multiplikation und Division. Die API kann über HTTP-Endpunkte aufgerufen werden.
 
