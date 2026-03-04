@@ -13,4 +13,9 @@ class CalculatorServiceTest {
         assertEquals(5, calculatorService.sum(2, 3));
     }
 
+    @Test
+    public void divideTest() {
+        assertEquals(2.0, calculatorService.divide(4, 2));
+        assertEquals(Double.POSITIVE_INFINITY, calculatorService.divide(1, 0));
+    }
 }
