@@ -13,4 +13,19 @@ class CalculatorServiceTest {
         assertEquals(5, calculatorService.sum(2, 3));
     }
 
+    @Test
+    public void divideTest() {
+        // Test normal division
+        assertEquals(3.0, calculatorService.divide(6, 2), 0.001);
+        
+        // Test division with non-integer result
+        assertEquals(2.5, calculatorService.divide(5, 2), 0.001);
+        
+        // Test division by zero
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            calculatorService.divide(5, 0);
+        });
+        assertEquals("Division by zero is not allowed", exception.getMessage());
+    }
+
 }
