@@ -31,6 +31,7 @@ class CalculatorControllerIntegrationTest {
 
         // Test division by zero
         mockMvc.perform(get("/divide").param("a", "5").param("b", "0"))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Division by zero is not allowed"));
     }
 }
