@@ -80,17 +80,10 @@ mvn test
 
 ## API-Endpunkte
 Die Anwendung bietet folgende Endpunkte:
-- **Addition**: `GET /api/calculate/add?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/add?a=5&b=3` → Ergebnis: `8`
+- **Addition**: `GET /sum?a={a}&b={b}`
+  Beispiel: `GET /sum?a=5&b=3` → Ergebnis: `8`
 
-- **Subtraktion**: `GET /api/calculate/subtract?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/subtract?a=5&b=3` → Ergebnis: `2`
-
-- **Multiplikation**: `GET /api/calculate/multiply?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/multiply?a=5&b=3` → Ergebnis: `15`
-
-- **Division**: `GET /api/calculate/divide?a={a}&b={b}`
-  Beispiel: `GET /api/calculate/divide?a=6&b=3` → Ergebnis: `2`
+*Hinweis: Weitere Operationen wie Subtraktion, Multiplikation und Division sind in der Logik implementiert, aber derzeit nicht über die API verfügbar.*
 
 ## Lizenz
 Dieses Projekt steht unter der MIT-Lizenz. Siehe [LICENSE](LICENSE) für weitere Informationen.
